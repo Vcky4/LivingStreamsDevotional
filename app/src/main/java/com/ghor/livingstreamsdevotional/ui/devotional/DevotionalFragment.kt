@@ -52,6 +52,16 @@ class DevotionalFragment : Fragment() {
         devotionalViewModel.qualifierText.observe(this,{
             binding.qualifierText.text = "($it)"
         })
+
+        //observe and display body
+        devotionalViewModel.bodyText.observe(this,{
+            binding.bodyText.text = it
+        })
+
+        //observe and display nugget
+        devotionalViewModel.nuggetText.observe(this,{
+            binding.nuggetText.text = it
+        })
     }
 
     override fun onDestroyView() {
