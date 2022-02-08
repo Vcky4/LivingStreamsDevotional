@@ -90,7 +90,7 @@ class DevotionalFragment : Fragment() {
 
         //observe and display evening reading
         devotionalViewModel.evening.observe(this,{
-            binding.evening.text = "Evening:      $it"
+            binding.evening.text = "Evening:       $it"
         })
     }
 
