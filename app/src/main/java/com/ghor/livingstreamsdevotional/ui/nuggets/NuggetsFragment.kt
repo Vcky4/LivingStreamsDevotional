@@ -1,4 +1,4 @@
-package com.ghor.livingstreamsdevotional.ui.naturalgroups
+package com.ghor.livingstreamsdevotional.ui.nuggets
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.ghor.livingstreamsdevotional.databinding.FragmentNaturalGroupsBinding
+import com.ghor.livingstreamsdevotional.databinding.FragmentNuggetsBinding
 
-class NaturalGroupFragment : Fragment() {
+class NuggetsFragment : Fragment() {
 
-    private lateinit var naturalGroupsViewModel: NaturalGroupsViewModel
-    private var _binding: FragmentNaturalGroupsBinding? = null
+    private lateinit var nuggetsViewModel: NuggetsViewModel
+    private var _binding: FragmentNuggetsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -24,14 +23,14 @@ class NaturalGroupFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        naturalGroupsViewModel =
-            ViewModelProvider(this)[NaturalGroupsViewModel::class.java]
+        nuggetsViewModel =
+            ViewModelProvider(this)[NuggetsViewModel::class.java]
 
-        _binding = FragmentNaturalGroupsBinding.inflate(inflater, container, false)
+        _binding = FragmentNuggetsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
-        naturalGroupsViewModel.text.observe(viewLifecycleOwner, {
+        nuggetsViewModel.text.observe(viewLifecycleOwner, {
             textView.text = it
         })
         return root

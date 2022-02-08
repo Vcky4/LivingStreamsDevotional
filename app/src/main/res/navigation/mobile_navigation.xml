@@ -6,10 +6,10 @@
     app:startDestination="@+id/navigation_devotional">
 
     <fragment
-        android:id="@+id/navigation_natural_groups"
-        android:name="com.ghor.livingstreamsdevotional.ui.naturalgroups.NaturalGroupFragment"
-        android:label="@string/natural_groups"
-        tools:layout="@layout/fragment_natural_groups" />
+        android:id="@+id/navigation_nuggets"
+        android:name="com.ghor.livingstreamsdevotional.ui.nuggets.NuggetsFragment"
+        android:label="@string/nuggets"
+        tools:layout="@layout/fragment_nuggets" />
 
     <fragment
         android:id="@+id/navigation_devotional"
@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_devotional" />
 
     <fragment
-        android:id="@+id/navigation_announcement"
-        android:name="com.ghor.livingstreamsdevotional.ui.announcement.AnnouncementFragment"
-        android:label="@string/announcement"
-        tools:layout="@layout/fragment_announcement" />
+        android:id="@+id/navigation_events"
+        android:name="com.ghor.livingstreamsdevotional.ui.events.EventsFragment"
+        android:label="@string/events"
+        tools:layout="@layout/fragment_events" />
 </navigation>

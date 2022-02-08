@@ -8,14 +8,14 @@
         android:title="@string/devotional" />
 
     <item
-        android:id="@+id/navigation_natural_groups"
-        android:icon="@drawable/ic_baseline_group_work_24"
-        android:title="@string/natural_groups" />
+        android:id="@+id/navigation_nuggets"
+        android:icon="@drawable/ic_baseline_speaker_notes_24"
+        android:title="@string/nuggets" />
 
 
     <item
-        android:id="@+id/navigation_announcement"
-        android:icon="@drawable/ic_baseline_announcement_24"
-        android:title="@string/announcement" />
+        android:id="@+id/navigation_events"
+        android:icon="@drawable/ic_baseline_event_24"
+        android:title="@string/events" />
 
 </menu>

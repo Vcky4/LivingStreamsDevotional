@@ -1,4 +1,4 @@
-package com.ghor.livingstreamsdevotional.ui.announcement
+package com.ghor.livingstreamsdevotional.ui.events
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.ghor.livingstreamsdevotional.databinding.FragmentAnnouncementBinding
+import com.ghor.livingstreamsdevotional.databinding.FragmentEventsBinding
 
-class AnnouncementFragment : Fragment() {
+class EventsFragment : Fragment() {
 
-    private lateinit var announcementViewModel: AnnouncementViewModel
-    private var _binding: FragmentAnnouncementBinding? = null
+    private lateinit var eventsViewModel: EventsViewModel
+    private var _binding: FragmentEventsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -24,14 +23,14 @@ class AnnouncementFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        announcementViewModel =
-            ViewModelProvider(this)[AnnouncementViewModel::class.java]
+        eventsViewModel =
+            ViewModelProvider(this)[EventsViewModel::class.java]
 
-        _binding = FragmentAnnouncementBinding.inflate(inflater, container, false)
+        _binding = FragmentEventsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        announcementViewModel.text.observe(viewLifecycleOwner, {
+        eventsViewModel.text.observe(viewLifecycleOwner, {
             textView.text = it
         })
         return root

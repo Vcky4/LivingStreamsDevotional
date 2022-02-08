@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">Living Streams Devotional</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="announcement">Announcement</string>
     <string name="devotional">Devotional</string>
-    <string name="natural_groups">Natural Groups</string>
+    <string name="events">Events</string>
+    <string name="nuggets">Nuggets</string>
 </resources>

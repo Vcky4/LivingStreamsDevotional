@@ -1,13 +1,13 @@
-package com.ghor.livingstreamsdevotional.ui.naturalgroups
+package com.ghor.livingstreamsdevotional.ui.events
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NaturalGroupsViewModel : ViewModel() {
+class EventsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is natural group Fragment"
+        value = "This is announcement Fragment"
     }
     val text: LiveData<String> = _text
 }
