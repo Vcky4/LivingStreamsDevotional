@@ -9,6 +9,8 @@ class DevotionalViewModel : ViewModel() {
     private val _qualifierText = MutableLiveData<String>("Light House Fellowship Edition")
     private val _dateText = MutableLiveData<String>("Saturday 01 May")
     private val _topicText = MutableLiveData<String>("wisdom will bring success")
+    private val _morning = MutableLiveData<String>("Ezekiel 9, Luke 21")
+    private val _evening = MutableLiveData<String>("Psalm 31")
     private val _prayers = MutableLiveData<String>("-Lord please baptize me with the grace and power to stand firm in dedication to your service in Jesus Name.\n" +
             "-Lord help me to wait for you for as long as necessary in the place of service till you come through for me in Jesus Name.\n"
     )
@@ -22,13 +24,7 @@ class DevotionalViewModel : ViewModel() {
             "Another reason why satan will do anything to take you away from the path of service is the massive blessings that God has promised to those who dedicate themselves to service. “And ye shall serve the Lord your God, and he shall bless thy bread, and thy water; and I will take sickness away from the midst of thee. There shall nothing cast their young, nor be barren, in thy land: the number of thy days I will fulfil. I will send my fear before thee, and will destroy all the people to whom thou shalt come, and I will make all thine enemies turn their backs unto thee”. (Exodus 23:25-27 KJV). The blessings are as follows: you will be above food poisoning, sickness will leave you, you will never suffer miscarriages, and neither you nor anything connected to you can be barren. Further more you will live long, etc.\n" +
             "\n" +
             "These were some of the reasons why satan targeted Zechariah and Elizabeth. But Zechariah was a dedicated man, he was loyal and committed to God as far as service was concerned. No amount of delay or frustration would remove Zechariah from his commitment. He had arrived old age already and his wife had passed child bearing age already, but he would not give up his life of service to God. His lot was to burn incense in the temple while people waited and prayed outside. He never left his duty post for once, and one day, right at the place of service, God visited him. Let me encourage you today to never leave your place of service, never abandon your duty post no matter what you see. The place of service is your place of blessing, and no matter how long it takes, if you stay at your duty post, your blessings will come through and the delay will be broken. Receive grace to dedicate your life to the service of God in Jesus Name.")
-    private val _nuggetText = MutableLiveData<String>("The place of service is your place of blessing, and no matter how long it takes, if you stay at your duty post, your blessings will come through and the delay will be broken." +
-            " _For Further Reading and Meditation_ \\n\" +\n" +
-            "            \"MORNING\\n\" +\n" +
-            "            \"Ezekiel 9, Luke 21\\n\" +\n" +
-            "            \"\\n\" +\n" +
-            "            \"EVENING\\n\" +\n" +
-            "            \"Psalm 31\\n\" +\n")
+    private val _nuggetText = MutableLiveData<String>("The place of service is your place of blessing, and no matter how long it takes, if you stay at your duty post, your blessings will come through and the delay will be broken.")
 
     //public
     val qualifierText: LiveData<String> = _qualifierText
@@ -40,6 +36,8 @@ class DevotionalViewModel : ViewModel() {
     val scriptureBody: LiveData<String> = _scriptureBody
     val prayers: LiveData<String> = _prayers
     val actionPoint: LiveData<String> = _actionPoint
+    val morning: LiveData<String> = _morning
+    val evening: LiveData<String> = _evening
 
     //methods
 

@@ -82,6 +82,16 @@ class DevotionalFragment : Fragment() {
         devotionalViewModel.actionPoint.observe(this,{
             binding.actionPointBody.text = it
         })
+
+        //observe and display morning reading
+        devotionalViewModel.morning.observe(this,{
+            binding.morning.text = "Morning:      $it"
+        })
+
+        //observe and display evening reading
+        devotionalViewModel.evening.observe(this,{
+            binding.evening.text = "Evening:      $it"
+        })
     }
 
     override fun onDestroyView() {
