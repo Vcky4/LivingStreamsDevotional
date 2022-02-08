@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="devotional">Devotional</string>
+    <string name="devotional">Devotionals</string>
     <string name="events">Events</string>
     <string name="nuggets">Nuggets</string>
     <string name="nugget">Nugget</string>

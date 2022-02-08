@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Living Streams Devotional</string>
-    <string name="devotional">Devotional</string>
+    <string name="devotional">Devotionals</string>
     <string name="events">Events</string>
     <string name="nuggets">Nuggets</string>
     <string name="nugget">Nugget</string>
