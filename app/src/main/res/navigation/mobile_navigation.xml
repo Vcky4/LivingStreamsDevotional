@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_devotional">
+
+    <fragment
+        android:id="@+id/navigation_natural_groups"
+        android:name="com.ghor.livingstreamsdevotional.ui.naturalgroups.NaturalGroupFragment"
+        android:label="@string/natural_groups"
+        tools:layout="@layout/fragment_natural_groups" />
+
+    <fragment
+        android:id="@+id/navigation_devotional"
+        android:name="com.ghor.livingstreamsdevotional.ui.devotional.DevotionalFragment"
+        android:label="@string/devotional"
+        tools:layout="@layout/fragment_devotional" />
+
+    <fragment
+        android:id="@+id/navigation_announcement"
+        android:name="com.ghor.livingstreamsdevotional.ui.announcement.AnnouncementFragment"
+        android:label="@string/announcement"
+        tools:layout="@layout/fragment_announcement" />
+</navigation>
