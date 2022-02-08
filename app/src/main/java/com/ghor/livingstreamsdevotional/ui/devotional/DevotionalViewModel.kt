@@ -28,10 +28,7 @@ class DevotionalViewModel : ViewModel() {
             "            \"Ezekiel 9, Luke 21\\n\" +\n" +
             "            \"\\n\" +\n" +
             "            \"EVENING\\n\" +\n" +
-            "            \"Psalm 31\\n\" +\n" +
-            "            \"\\n\" +\n" +
-            "            \"\\n\" +\n" +
-            "            \" _For Feedback & Enquires, please send a mail to *ezekiel.atang@yahoo.com*_\"")
+            "            \"Psalm 31\\n\" +\n")
 
     //public
     val qualifierText: LiveData<String> = _qualifierText
