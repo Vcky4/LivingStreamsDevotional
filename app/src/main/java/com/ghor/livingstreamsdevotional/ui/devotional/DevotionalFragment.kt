@@ -1,5 +1,6 @@
 package com.ghor.livingstreamsdevotional.ui.devotional
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,13 +29,29 @@ class DevotionalFragment : Fragment() {
             ViewModelProvider(this)[DevotionalViewModel::class.java]
 
         _binding = FragmentDevotionalBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        devotionalViewModel.text.observe(viewLifecycleOwner, {
-            textView.text = it
+
+        return binding.root
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        //observe and display date
+        devotionalViewModel.dateText.observe(this,{
+            binding.dateText.text = it
         })
-        return root
+
+        //observe and display topic
+        devotionalViewModel.topicText.observe(this,{
+            binding.topicText.text = it
+        })
+
+        //observe and display qualifier
+        devotionalViewModel.qualifierText.observe(this,{
+            binding.qualifierText.text = "($it)"
+        })
     }
 
     override fun onDestroyView() {
