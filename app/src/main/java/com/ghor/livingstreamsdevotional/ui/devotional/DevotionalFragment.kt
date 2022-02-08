@@ -62,6 +62,26 @@ class DevotionalFragment : Fragment() {
         devotionalViewModel.nuggetText.observe(this,{
             binding.nuggetText.text = it
         })
+
+        //observe and display scripture
+        devotionalViewModel.scripture.observe(this,{
+            binding.scripture.text = it
+        })
+
+        //observe and display scripture body
+        devotionalViewModel.scriptureBody.observe(this,{
+            binding.scriptureBody.text = it
+        })
+
+        //observe and display prayers
+        devotionalViewModel.prayers.observe(this,{
+            binding.prayerBody.text = it
+        })
+
+        //observe and display action points
+        devotionalViewModel.actionPoint.observe(this,{
+            binding.actionPointBody.text = it
+        })
     }
 
     override fun onDestroyView() {
