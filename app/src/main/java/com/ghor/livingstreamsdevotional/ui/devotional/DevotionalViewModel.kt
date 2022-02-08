@@ -27,10 +27,8 @@ class DevotionalViewModel : ViewModel() {
             "-Lord please baptize me with the grace and power to stand firm in dedication to your service in Jesus Name.\n" +
             "-Lord help me to wait for you for as long as necessary in the place of service till you come through for me in Jesus Name.\n"
             )
-    private val _nuggetText = MutableLiveData<String>("\"\\n\" +\n" +
-            "            \"The place of service is your place of blessing, and no matter how long it takes, if you stay at your duty post, your blessings will come through and the delay will be broken.\\n\" +\n" +
-            "            \"\\n\" +\n" +
-            "            \" _For Further Reading and Meditation_ \\n\" +\n" +
+    private val _nuggetText = MutableLiveData<String>("The place of service is your place of blessing, and no matter how long it takes, if you stay at your duty post, your blessings will come through and the delay will be broken." +
+            " _For Further Reading and Meditation_ \\n\" +\n" +
             "            \"MORNING\\n\" +\n" +
             "            \"Ezekiel 9, Luke 21\\n\" +\n" +
             "            \"\\n\" +\n" +

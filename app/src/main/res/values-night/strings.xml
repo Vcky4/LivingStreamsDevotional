@@ -4,4 +4,6 @@
     <string name="events">Events</string>
     <string name="nuggets">Nuggets</string>
     <string name="nugget">Nugget:</string>
+    <string name="action_point">Action Point</string>
+    <string name="prayer">Prayer</string>
 </resources>
