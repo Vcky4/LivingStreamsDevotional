@@ -1,5 +1,6 @@
 package com.ghor.livingstreamsdevotional.ui.adminauthentication
 
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -113,6 +114,35 @@ class AuthenticationFragment : Fragment() {
             }
     }
 
+    private fun register(email: String, password: String) {
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d(ContentValues.TAG, "createWithEmail:success")
+                binding.loadingRegister.visibility = View.GONE
+                //save user details
+//                    auth.currentUser?.let { authSharedViewModel.writeNewUser(it.uid) }
+                Toast.makeText(context, "success!", Toast.LENGTH_SHORT).show()
+                //navigate to home
+                findNavController().navigate(R.id.action_authentication_to_navigation_devotional_admin)
+            } else {
+                // If sign in fails, display a message to the user.
+                Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
+                binding.loadingRegister.visibility = View.GONE
+                Toast.makeText(
+                    context,
+                    "Registration failed.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }.addOnFailureListener { exception ->
+            Toast.makeText(
+                context,
+                exception.localizedMessage,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
 
     private fun handleClicks() {
 
@@ -165,6 +195,7 @@ class AuthenticationFragment : Fragment() {
 //                    binding.emailText.text.toString(),
 //                    binding.regNoText.text.toString()
 //                )
+                register(binding.registerEmail.text.toString(), binding.registerPassword.text.toString())
 
             } else {
 
