@@ -24,7 +24,7 @@ private var _binding: FragmentAdminDevotionalBinding? = null
     savedInstanceState: Bundle?
   ): View {
     devotionalAdminViewModel =
-            ViewModelProvider(this).get(DevotionalAdminViewModel::class.java)
+      ViewModelProvider(this)[DevotionalAdminViewModel::class.java]
 
     _binding = FragmentAdminDevotionalBinding.inflate(inflater, container, false)
     val root: View = binding.root
