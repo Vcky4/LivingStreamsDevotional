@@ -6,4 +6,5 @@
     <string name="nugget">Nugget</string>
     <string name="action_point">Action Points</string>
     <string name="prayer">Prayer</string>
+    <string name="title_activity_admin">AdminActivity</string>
 </resources>

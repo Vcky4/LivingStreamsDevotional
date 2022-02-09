@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "349805143890",
+    "project_id": "living-streams-devotional",
+    "storage_bucket": "living-streams-devotional.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349805143890:android:18ecf965ecf51363503c8b",
+        "android_client_info": {
+          "package_name": "com.ghor.livingstreamsdevotional"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349805143890-1ancc67moattp8uivrue8ud0f9j2vu54.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ghor.livingstreamsdevotional",
+            "certificate_hash": "dc5f9b409b0aad887e88c0ed42886b1135cd458a"
+          }
+        },
+        {
+          "client_id": "349805143890-dbtag6j1pvs99hmtug5rfqm4244ae8m0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnpxV2U-URCmIUJfTQ6WIChaWgJiq9trU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349805143890-dbtag6j1pvs99hmtug5rfqm4244ae8m0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
