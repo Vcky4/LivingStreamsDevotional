@@ -7,4 +7,8 @@
     <string name="action_point">Action Points</string>
     <string name="prayer">Prayer</string>
     <string name="title_activity_admin">AdminActivity</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">login</string>
+    <string name="welcome_back">Welcome Back</string>
 </resources>
