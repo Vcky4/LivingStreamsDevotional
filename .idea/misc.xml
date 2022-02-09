@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/menu/admin_bottom_nav_menu.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/menu/sign_in.xml" value="0.21197916666666666" />
       </map>
     </option>
   </component>

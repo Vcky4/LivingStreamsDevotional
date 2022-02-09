@@ -1,6 +1,9 @@
 package com.ghor.livingstreamsdevotional
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -32,4 +35,20 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.sign_in, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+       when (item.itemId){
+           R.id.sign_in -> {
+               //navigate to admin activity
+               startActivity(Intent(this, AdminActivity::class.java))
+               true
+           }
+           else -> super.onOptionsItemSelected(item)
+       }
+
 }

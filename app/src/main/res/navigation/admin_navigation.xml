@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation2"
-    app:startDestination="@+id/navigation_devotional_admin">
+    app:startDestination="@+id/authentication">
 
     <fragment
         android:id="@+id/navigation_nugget_admin"
