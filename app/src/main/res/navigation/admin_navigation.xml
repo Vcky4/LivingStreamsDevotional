@@ -27,5 +27,15 @@
         android:id="@+id/authentication"
         android:name="com.ghor.livingstreamsdevotional.ui.adminauthentication.AuthenticationFragment"
         android:label="Authentication"
-        tools:layout="@layout/authentication_fragment"/>
+        tools:layout="@layout/authentication_fragment">
+        <action
+            android:id="@+id/action_authentication_to_navigation_devotional_admin"
+            app:destination="@id/navigation_devotional_admin"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/authentication"
+            app:popUpToInclusive="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
 </navigation>
