@@ -22,4 +22,10 @@
         android:name="com.ghor.livingstreamsdevotional.ui.adminevent.EventAdminFragment"
         android:label="@string/events"
         tools:layout="@layout/fragment_admin_event" />
+
+    <fragment
+        android:id="@+id/authentication"
+        android:name="com.ghor.livingstreamsdevotional.ui.adminauthentication.AuthenticationFragment"
+        android:label="Authentication"
+        tools:layout="@layout/authentication_fragment"/>
 </navigation>
