@@ -41,7 +41,9 @@ class AuthenticationFragment : Fragment() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
-
+        handleClicks()
+        loginTextWatchers()
+        registerTextWatchers()
 
         return binding.root
     }
@@ -57,9 +59,6 @@ class AuthenticationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val email = ""
-        val password = ""
 
         binding.registerBt.setOnClickListener {
 
@@ -89,6 +88,31 @@ class AuthenticationFragment : Fragment() {
 //    }
 
 
+    private fun login(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithEmail:success")
+                    Toast.makeText(context, "login successful!", Toast.LENGTH_LONG)
+                        .show()
+                    //navigate to home
+                    findNavController().navigate(R.id.action_authentication_to_navigation_devotional_admin)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.exception)
+                    Toast.makeText(context, "invalid login details", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }.addOnFailureListener { exception ->
+                Toast.makeText(
+                    context,
+                    exception.localizedMessage,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+    }
+
 
     private fun handleClicks() {
 
@@ -96,21 +120,22 @@ class AuthenticationFragment : Fragment() {
         binding.loginBt.setOnClickListener {
 
             //here you can check for network availability first, if the network is available, continue
-            if (Utility.isNetworkAvailable(applicationContext)) {
+            if (Utility.isNetworkAvailable(context)) {
 
                 //show loading
-                binding.loadingUser.visibility = View.VISIBLE
-                binding.goButton.isEnabled = false
+                binding.loadingLogin.visibility = View.VISIBLE
+                binding.loginBt.isEnabled = false
 
 
                 //save to viewModel
-                authSharedViewModel.emailValue(binding.emailText.text.toString())
-                authSharedViewModel.regNoValue(binding.regNoText.text.toString())
+//                authSharedViewModel.emailValue(binding.emailText.text.toString())
+//                authSharedViewModel.regNoValue(binding.regNoText.text.toString())
                 //check if already exist
 //                checkEmailExistsOrNot(
 //                    binding.emailText.text.toString(),
 //                    binding.regNoText.text.toString()
 //                )
+                login(binding.loginEmail.text.toString(), binding.loginPassword.text.toString())
 
             } else {
 
@@ -122,24 +147,24 @@ class AuthenticationFragment : Fragment() {
 
 
         //on click of register button
-        binding.loginBt.setOnClickListener {
+        binding.registerBt.setOnClickListener {
 
             //here you can check for network availability first, if the network is available, continue
-            if (Utility.isNetworkAvailable(applicationContext)) {
+            if (Utility.isNetworkAvailable(context)) {
 
                 //show loading
-                binding.loadingUser.visibility = View.VISIBLE
-                binding.goButton.isEnabled = false
+                binding.loadingRegister.visibility = View.VISIBLE
+                binding.registerBt.isEnabled = false
 
 
-                //save to viewModel
-                authSharedViewModel.emailValue(binding.emailText.text.toString())
-                authSharedViewModel.regNoValue(binding.regNoText.text.toString())
+//                //save to viewModel
+//                authSharedViewModel.emailValue(binding.emailText.text.toString())
+//                authSharedViewModel.regNoValue(binding.regNoText.text.toString())
                 //check if already exist
-                checkEmailExistsOrNot(
-                    binding.emailText.text.toString(),
-                    binding.regNoText.text.toString()
-                )
+//                checkEmailExistsOrNot(
+//                    binding.emailText.text.toString(),
+//                    binding.regNoText.text.toString()
+//                )
 
             } else {
 
@@ -174,16 +199,16 @@ class AuthenticationFragment : Fragment() {
         binding.loginPassword.addTextChangedListener(watcher)
     }
 
-    private fun RegisterTextWatchers() {
+    private fun registerTextWatchers() {
         val watcher: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val s1 = binding.loginEmail.text.toString()
-                val s2 = binding.loginPassword.text.toString()
+                val s1 = binding.registerEmail.text.toString()
+                val s2 = binding.registerPassword.text.toString()
 
                 //check if they are empty, make button not clickable
-                binding.loginBt.isEnabled = !(s1.isEmpty() || s2.isEmpty())
+                binding.registerBt.isEnabled = !(s1.isEmpty() || s2.isEmpty())
 
 //                if (s2.length == 2) {
 //                    binding.regNoText.text?.append("/")
@@ -194,8 +219,8 @@ class AuthenticationFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
 
         }
-        binding.loginEmail.addTextChangedListener(watcher)
-        binding.loginPassword.addTextChangedListener(watcher)
+        binding.registerEmail.addTextChangedListener(watcher)
+        binding.registerPassword.addTextChangedListener(watcher)
     }
 
     override fun onDestroyView() {
