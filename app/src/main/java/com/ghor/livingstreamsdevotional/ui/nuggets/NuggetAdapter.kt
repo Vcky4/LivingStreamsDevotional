@@ -16,18 +16,23 @@ class NuggetAdapter : RecyclerView.Adapter<NuggetAdapter.NuggetViewHolder>() {
             binding.nuggetsT.text = nuggets.nugget
         }
 
-        fun setPosition(position: Int){
-            if (position.div(2) == 0){
+        fun setPosition(position: Int) {
+            if (position.div(2) == 0) {
                 binding.layout.setPadding(90, 10, 10, 10)
-            }else{
+            } else {
                 binding.layout.setPadding(10, 10, 90, 10)
 
             }
         }
     }
 
-    fun setUpNuggets(nuggets: List<NuggetData>){
-        this.nuggetList.addAll(nuggets)
+    fun setUpNuggets(nuggets: List<NuggetData>) {
+        if (nuggets.size > nuggetList.size) {
+            nuggetList.add(nuggets.last())
+        } else {
+            this.nuggetList.addAll(nuggets)
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NuggetViewHolder {
