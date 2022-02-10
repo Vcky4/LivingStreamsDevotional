@@ -6,8 +6,7 @@ import androidx.lifecycle.ViewModel
 
 class NuggetsViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is nuggets Fragment"
-    }
-    val text: LiveData<String> = _text
+    private val _text = MutableLiveData<List<NuggetData>>()
+
+    val nuggets: LiveData<List<NuggetData>> = _text
 }

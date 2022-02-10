@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ghor.livingstreamsdevotional.databinding.FragmentNuggetsBinding
 
 class NuggetsFragment : Fragment() {
@@ -27,13 +27,20 @@ class NuggetsFragment : Fragment() {
             ViewModelProvider(this)[NuggetsViewModel::class.java]
 
         _binding = FragmentNuggetsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-//        val textView: TextView = binding.textHome
-//        nuggetsViewModel.text.observe(viewLifecycleOwner, {
-//            textView.text = it
-//        })
-        return root
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val adapter = NuggetAdapter()
+        binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
+        binding.nuggetRecycler.adapter = adapter
+
+        nuggetsViewModel.nuggets.observe(this,{
+            adapter.setUpNuggets(it)
+        })
     }
 
     override fun onDestroyView() {
