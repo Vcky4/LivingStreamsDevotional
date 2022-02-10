@@ -83,6 +83,7 @@ class AuthenticationFragment : Fragment() {
                     Toast.makeText(context, "invalid login details", Toast.LENGTH_SHORT)
                         .show()
                     binding.loadingLogin.visibility = GONE
+                    binding.loginBt.isEnabled = true
                 }
             }.addOnFailureListener { exception ->
                 Toast.makeText(
@@ -107,6 +108,7 @@ class AuthenticationFragment : Fragment() {
                 // If sign in fails, display a message to the user.
                 Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
                 binding.loadingRegister.visibility = GONE
+                binding.registerBt.isEnabled = true
                 Toast.makeText(
                     context,
                     "Registration failed.",

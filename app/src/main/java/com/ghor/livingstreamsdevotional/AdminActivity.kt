@@ -2,6 +2,7 @@ package com.ghor.livingstreamsdevotional
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -32,5 +33,15 @@ class AdminActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.authentication) {
+
+                navView.visibility = View.GONE
+            } else {
+
+                navView.visibility = View.VISIBLE
+            }
+        }
     }
 }
