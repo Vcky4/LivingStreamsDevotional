@@ -29,10 +29,10 @@ class NuggetsFragment : Fragment() {
         _binding = FragmentNuggetsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        nuggetsViewModel.text.observe(viewLifecycleOwner, {
-            textView.text = it
-        })
+//        val textView: TextView = binding.textHome
+//        nuggetsViewModel.text.observe(viewLifecycleOwner, {
+//            textView.text = it
+//        })
         return root
     }
 

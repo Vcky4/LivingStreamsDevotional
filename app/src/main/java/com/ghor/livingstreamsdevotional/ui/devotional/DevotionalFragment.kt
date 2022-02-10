@@ -70,7 +70,7 @@ class DevotionalFragment : Fragment() {
 
         //observe and display scripture body
         devotionalViewModel.scriptureBody.observe(this,{
-            binding.scriptureBody.text = it
+            binding.scriptureBody.text = " '' $it '' "
         })
 
         //observe and display prayers
