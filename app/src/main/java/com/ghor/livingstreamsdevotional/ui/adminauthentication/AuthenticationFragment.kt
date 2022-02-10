@@ -10,6 +10,8 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
@@ -42,10 +44,6 @@ class AuthenticationFragment : Fragment() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
-        handleClicks()
-        loginTextWatchers()
-        registerTextWatchers()
-
         return binding.root
     }
 
@@ -61,32 +59,12 @@ class AuthenticationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.registerBt.setOnClickListener {
-
-
-        }
+        handleClicks()
+        loginTextWatchers()
+        registerTextWatchers()
 
     }
 
-
-//    private fun checkEmailExistsOrNot(email: String, regNo: String) {
-//
-//        auth.fetchSignInMethodsForEmail(email).addOnCompleteListener { task ->
-//            Log.d(TAG, "" + (task.result?.signInMethods?.size ?: 0))
-//            if (task.result?.signInMethods?.size == 0) {
-//                // email not existed
-//                binding.loadingUser.visibility = GONE
-//                binding.goButton.visibility = GONE
-//                binding.registerLayout.visibility = VISIBLE
-//            } else {
-//                // email existed
-//                //login
-//                binding.loadingUser.visibility = GONE
-//                login(email, regNo)
-//
-//            }
-//        }.addOnFailureListener { e -> e.printStackTrace() }
-//    }
 
 
     private fun login(email: String, password: String) {
@@ -104,6 +82,7 @@ class AuthenticationFragment : Fragment() {
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
                     Toast.makeText(context, "invalid login details", Toast.LENGTH_SHORT)
                         .show()
+                    binding.loadingLogin.visibility = GONE
                 }
             }.addOnFailureListener { exception ->
                 Toast.makeText(
@@ -118,7 +97,7 @@ class AuthenticationFragment : Fragment() {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d(ContentValues.TAG, "createWithEmail:success")
-                binding.loadingRegister.visibility = View.GONE
+                binding.loadingRegister.visibility = GONE
                 //save user details
 //                    auth.currentUser?.let { authSharedViewModel.writeNewUser(it.uid) }
                 Toast.makeText(context, "success!", Toast.LENGTH_SHORT).show()
@@ -127,7 +106,7 @@ class AuthenticationFragment : Fragment() {
             } else {
                 // If sign in fails, display a message to the user.
                 Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
-                binding.loadingRegister.visibility = View.GONE
+                binding.loadingRegister.visibility = GONE
                 Toast.makeText(
                     context,
                     "Registration failed.",
@@ -153,7 +132,7 @@ class AuthenticationFragment : Fragment() {
             if (Utility.isNetworkAvailable(context)) {
 
                 //show loading
-                binding.loadingLogin.visibility = View.VISIBLE
+                binding.loadingLogin.visibility = VISIBLE
                 binding.loginBt.isEnabled = false
 
 
@@ -183,7 +162,7 @@ class AuthenticationFragment : Fragment() {
             if (Utility.isNetworkAvailable(context)) {
 
                 //show loading
-                binding.loadingRegister.visibility = View.VISIBLE
+                binding.loadingRegister.visibility = VISIBLE
                 binding.registerBt.isEnabled = false
 
 
