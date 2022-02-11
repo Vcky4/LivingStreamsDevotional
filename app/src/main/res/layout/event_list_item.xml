@@ -46,11 +46,11 @@
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/details_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/date_card"
         app:layout_constraintEnd_toStartOf="@id/event_time"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginHorizontal="10dp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -89,4 +89,23 @@
         android:layout_margin="10dp"
         android:background="@drawable/time_shape"
         android:padding="5dp"/>
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/details_layout"
+        app:layout_constraintTop_toBottomOf="@id/details_layout"
+        android:src="@drawable/ic_baseline_location_on_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="location icon" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/details_layout"
+        app:layout_constraintStart_toEndOf="@id/icon"
+        app:layout_constraintEnd_toEndOf="@id/details_layout"
+        android:text="God's house of refuge"
+        android:textStyle="bold"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
