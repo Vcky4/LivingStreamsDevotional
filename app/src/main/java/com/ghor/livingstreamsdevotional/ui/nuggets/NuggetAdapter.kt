@@ -3,6 +3,7 @@ package com.ghor.livingstreamsdevotional.ui.nuggets
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ghor.livingstreamsdevotional.R
 import com.ghor.livingstreamsdevotional.databinding.NuggetListItemBinding
 
 class NuggetAdapter : RecyclerView.Adapter<NuggetAdapter.NuggetViewHolder>() {
@@ -17,21 +18,22 @@ class NuggetAdapter : RecyclerView.Adapter<NuggetAdapter.NuggetViewHolder>() {
         }
 
         fun setPosition(position: Int) {
-            if (position.div(2) == 0) {
-                binding.layout.setPadding(90, 10, 10, 10)
-            } else {
+            if (position % 2 == 0) {
+                binding.nuggetsT.setBackgroundResource(R.drawable.nugget_fill_left)
                 binding.layout.setPadding(10, 10, 90, 10)
-
+            } else {
+                binding.nuggetsT.setBackgroundResource(R.drawable.nugget_fill_right)
+                binding.layout.setPadding(90, 10, 10, 10)
             }
         }
     }
 
     fun setUpNuggets(nuggets: List<NuggetData>) {
-        if (nuggets.size > nuggetList.size) {
-            nuggetList.add(nuggets.last())
-        } else {
+//        if (nuggets.size == nuggetList.size) {
             this.nuggetList.addAll(nuggets)
-        }
+//        } else {
+//            this.nuggetList.add(nuggets.last())
+//        }
 
     }
 
