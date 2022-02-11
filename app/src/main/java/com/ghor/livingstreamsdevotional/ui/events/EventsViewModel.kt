@@ -6,8 +6,14 @@ import androidx.lifecycle.ViewModel
 
 class EventsViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is events Fragment"
-    }
-    val text: LiveData<String> = _text
+    private val _events = MutableLiveData<List<EventData>>(
+        listOf(
+            EventData(
+                "2", "AUG", "World changers convention",
+                "Annual convention",
+                "5pm", "God's House Of Refuge, 8 ikot ebido street."
+            )
+        )
+    )
+    val events: LiveData<List<EventData>> = _events
 }
