@@ -14,4 +14,5 @@
     <string name="register_an_admin">Register An Admin</string>
     <string name="sign_in">sign in</string>
     <string name="today_s_nugget">Today\'s Nuggets</string>
+    <string name="upcoming_events">Upcoming Events</string>
 </resources>
