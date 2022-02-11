@@ -29,12 +29,11 @@ class NuggetAdapter : RecyclerView.Adapter<NuggetAdapter.NuggetViewHolder>() {
     }
 
     fun setUpNuggets(nuggets: List<NuggetData>) {
-//        if (nuggets.size == nuggetList.size) {
+        if (nuggetList.isEmpty()) {
             this.nuggetList.addAll(nuggets)
-//        } else {
-//            this.nuggetList.add(nuggets.last())
-//        }
-
+        } else if (nuggetList.size < nuggets.size) {
+            this.nuggetList.add(nuggets.last())
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NuggetViewHolder {
