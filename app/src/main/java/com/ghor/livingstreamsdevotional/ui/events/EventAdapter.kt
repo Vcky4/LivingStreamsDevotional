@@ -18,6 +18,7 @@ class EventAdapter: RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
                 binding.eventTime.text = event.time
                 binding.eventTitle.text = event.title
                 binding.eventVenue.text = event.venue
+                binding.eventDescription.text = event.description
             }
         }
 
