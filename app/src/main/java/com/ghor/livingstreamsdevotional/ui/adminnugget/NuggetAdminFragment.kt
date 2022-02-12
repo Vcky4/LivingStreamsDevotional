@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ghor.livingstreamsdevotional.databinding.FragmentAdminNuggetBinding
 import com.ghor.livingstreamsdevotional.ui.adminauthentication.Utility
-import com.ghor.livingstreamsdevotional.ui.nuggets.NuggetAdapter
 
 class NuggetAdminFragment : Fragment() {
 
@@ -40,7 +39,7 @@ private var _binding: FragmentAdminNuggetBinding? = null
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val adapter = NuggetAdapter()
+    val adapter = AdminNuggetAdapter()
     binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
     binding.nuggetRecycler.adapter = adapter
 
