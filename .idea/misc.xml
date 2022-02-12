@@ -3,18 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/circle.xml" value="0.18425925925925926" />
         <entry key="app/src/main/res/drawable/frame.xml" value="0.18888888888888888" />
         <entry key="app/src/main/res/drawable/ic_baseline_event_24.xml" value="0.18888888888888888" />
         <entry key="app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.18518518518518517" />
         <entry key="app/src/main/res/drawable/layout_bg.xml" value="0.18518518518518517" />
         <entry key="app/src/main/res/drawable/nugget_fill.xml" value="0.17962962962962964" />
         <entry key="app/src/main/res/drawable/nugget_fill_left.xml" value="0.18888888888888888" />
+        <entry key="app/src/main/res/drawable/nugget_text.xml" value="0.18425925925925926" />
         <entry key="app/src/main/res/drawable/time_shape.xml" value="0.18518518518518517" />
         <entry key="app/src/main/res/layout/activity_admin.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/authentication_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/event_list_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_admin_devotional.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_admin_nugget.xml" value="0.10309017223910841" />
         <entry key="app/src/main/res/layout/fragment_announcement.xml" value="0.1015625" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/fragment_devotional.xml" value="0.22" />
@@ -22,7 +25,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/fragment_natural_groups.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.21197916666666666" />
-        <entry key="app/src/main/res/layout/fragment_nuggets.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_nuggets.xml" value="0.2" />
         <entry key="app/src/main/res/layout/nugget_list_item.xml" value="0.1331521739130435" />
         <entry key="app/src/main/res/menu/admin_bottom_nav_menu.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.21197916666666666" />
