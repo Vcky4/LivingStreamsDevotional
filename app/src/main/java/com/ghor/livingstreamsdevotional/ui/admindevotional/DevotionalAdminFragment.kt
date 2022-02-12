@@ -31,11 +31,6 @@ class DevotionalAdminFragment : Fragment() {
 
         _binding = FragmentAdminDevotionalBinding.inflate(inflater, container, false)
 
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         devotionalAdminViewModel.date.observe(this, {
             binding.dateText.setText(it)
@@ -72,10 +67,30 @@ class DevotionalAdminFragment : Fragment() {
         })
 
 
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        dataTextWatchers(binding.eveningText)
+        dataTextWatchers(binding.morningText)
+        dataTextWatchers(binding.dateText)
+        dataTextWatchers(binding.bodyText)
+        dataTextWatchers(binding.scripture)
+        dataTextWatchers(binding.scriptureBody)
+        dataTextWatchers(binding.topicText)
+        dataTextWatchers(binding.qualifierText)
+        dataTextWatchers(binding.actionPointBody)
+        dataTextWatchers(binding.prayerBody)
+        dataTextWatchers(binding.nuggetText)
+
+
     }
 
 
-    private fun registerTextWatchers(view: EditText) {
+    private fun dataTextWatchers(view: EditText) {
         val watcher: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
