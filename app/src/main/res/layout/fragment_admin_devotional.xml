@@ -85,9 +85,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/body_text"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:hint="Devotional body"
                 android:inputType="textLongMessage"
+                android:textColorHint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/action_point_card"
@@ -281,6 +282,7 @@
                         app:layout_constraintTop_toTopOf="@id/morning"
                         app:layout_constraintBottom_toBottomOf="@id/morning"
                         android:textColorHint="@color/white"
+                        android:textColor="@color/white"
                         android:hint="John 3"/>
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/evening"
@@ -299,6 +301,7 @@
                         android:id="@+id/evening_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         app:layout_constraintStart_toEndOf="@id/evening"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/evening"
