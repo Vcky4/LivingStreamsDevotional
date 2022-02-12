@@ -29,6 +29,42 @@ private var _binding: FragmentAdminDevotionalBinding? = null
     return binding.root
   }
 
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    devotionalAdminViewModel.date.observe(this,{
+      binding.dateText.setText(it)
+    })
+     devotionalAdminViewModel.topic.observe(this,{
+      binding.topicText.setText(it)
+    })
+     devotionalAdminViewModel.scripture.observe(this,{
+      binding.scripture.setText(it)
+    })
+     devotionalAdminViewModel.scriptureBody.observe(this,{
+      binding.scriptureBody.setText(it)
+    })
+     devotionalAdminViewModel.devotionalBody.observe(this,{
+      binding.bodyText.setText(it)
+    })
+     devotionalAdminViewModel.nuggets.observe(this,{
+      binding.nuggetText.setText(it)
+    })
+     devotionalAdminViewModel.prayer.observe(this,{
+      binding.prayerBody.setText(it)
+    })
+    devotionalAdminViewModel.actionPoints.observe(this,{
+      binding.actionPointBody.setText(it)
+    })
+    devotionalAdminViewModel.qualifier.observe(this,{
+      binding.qualifierText.setText(it)
+    })
+
+
+
+
+  }
+
 override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

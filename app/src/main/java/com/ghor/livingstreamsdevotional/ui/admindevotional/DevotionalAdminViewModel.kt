@@ -14,7 +14,7 @@ class DevotionalAdminViewModel : ViewModel() {
     private val _actionPoints = MutableLiveData<String>()
     private val _prayer = MutableLiveData<String>()
     private val _nuggets = MutableLiveData<String>()
-
+    private val _qualifier = MutableLiveData<String>()
 
 
     val date: LiveData<String> = _date
@@ -25,30 +25,42 @@ class DevotionalAdminViewModel : ViewModel() {
     val actionPoints: LiveData<String> = _actionPoints
     val prayer: LiveData<String> = _prayer
     val nuggets: LiveData<String> = _nuggets
+    val qualifier: LiveData<String> = _qualifier
 
-    fun saveDate(date: String){
+    fun saveDate(date: String) {
         _date.value = date
     }
-    fun saveTopic(topic: String){
+
+    fun saveTopic(topic: String) {
         _topic.value = topic
     }
-    fun saveScripture(scripture: String){
+
+    fun saveScripture(scripture: String) {
         _scripture.value = scripture
     }
-    fun saveScriptureBody(scriptureBody: String){
+
+    fun saveScriptureBody(scriptureBody: String) {
         _scriptureBody.value = scriptureBody
     }
-    fun saveDevotionalBody(devotionalBody: String){
+
+    fun saveDevotionalBody(devotionalBody: String) {
         _devotionalBody.value = devotionalBody
     }
-    fun saveActionPoints(actionPoints: String){
+
+    fun saveActionPoints(actionPoints: String) {
         _actionPoints.value = actionPoints
     }
-    fun savePrayer(prayer: String){
+
+    fun savePrayer(prayer: String) {
         _prayer.value = prayer
     }
-    fun saveNugget(nugget: String){
+
+    fun saveNugget(nugget: String) {
         _nuggets.value = nugget
+    }
+
+    fun saveQualifier(qualifier: String) {
+        _qualifier.value = qualifier
     }
 
 }
