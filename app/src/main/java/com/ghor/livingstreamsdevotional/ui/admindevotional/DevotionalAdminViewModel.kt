@@ -19,7 +19,7 @@ class DevotionalAdminViewModel : ViewModel() {
     private val _evening = MutableLiveData<String>()
 
 
-    val date  = "_date.value "
+    val date  = _date
     val topic = _topic.value
     val scripture = _scripture.value
     val scriptureBody = _scriptureBody.value

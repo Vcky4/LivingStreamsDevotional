@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ghor.livingstreamsdevotional.databinding.FragmentAdminNuggetBinding
 
@@ -24,16 +22,12 @@ private var _binding: FragmentAdminNuggetBinding? = null
     savedInstanceState: Bundle?
   ): View {
     nuggetAdminViewModel =
-            ViewModelProvider(this).get(NuggetAdminViewModel::class.java)
+      ViewModelProvider(this)[NuggetAdminViewModel::class.java]
 
     _binding = FragmentAdminNuggetBinding.inflate(inflater, container, false)
-    val root: View = binding.root
 
-    val textView: TextView = binding.textHome
-    nuggetAdminViewModel.text.observe(viewLifecycleOwner, {
-      textView.text = it
-    })
-    return root
+
+    return binding.root
   }
 
 override fun onDestroyView() {

@@ -35,7 +35,7 @@ class DevotionalAdminFragment : Fragment() {
         _binding = FragmentAdminDevotionalBinding.inflate(inflater, container, false)
 
 
-            binding.dateText.setText(devotionalAdminViewModel.date)
+//        binding.dateText.setText(devotionalAdminViewModel.date.value)
 //            binding.topicText.setText(it)
 //            binding.scripture.setText(it)
 //            binding.scriptureBody.setText(it)
@@ -47,7 +47,18 @@ class DevotionalAdminFragment : Fragment() {
 //            binding.morningText.setText(it)
 //            binding.eveningText.setText(it)
 
-
+        //save text changes
+//        dataTextWatchers(binding.eveningText)
+//        dataTextWatchers(binding.morningText)
+//        dataTextWatchers(binding.dateText)
+//        dataTextWatchers(binding.bodyText)
+//        dataTextWatchers(binding.scripture)
+//        dataTextWatchers(binding.scriptureBody)
+//        dataTextWatchers(binding.topicText)
+//        dataTextWatchers(binding.qualifierText)
+//        dataTextWatchers(binding.actionPointBody)
+//        dataTextWatchers(binding.prayerBody)
+//        dataTextWatchers(binding.nuggetText)
 
         return binding.root
     }
@@ -57,19 +68,6 @@ class DevotionalAdminFragment : Fragment() {
 
         //handle clicks
         handleClicks()
-
-        //save text changes
-        dataTextWatchers(binding.eveningText)
-        dataTextWatchers(binding.morningText)
-        dataTextWatchers(binding.dateText)
-        dataTextWatchers(binding.bodyText)
-        dataTextWatchers(binding.scripture)
-        dataTextWatchers(binding.scriptureBody)
-        dataTextWatchers(binding.topicText)
-        dataTextWatchers(binding.qualifierText)
-        dataTextWatchers(binding.actionPointBody)
-        dataTextWatchers(binding.prayerBody)
-        dataTextWatchers(binding.nuggetText)
 
 
     }
@@ -87,7 +85,7 @@ class DevotionalAdminFragment : Fragment() {
                 binding.postBt.isEnabled = false
 
 
-            //do the posting here
+                //do the posting here
 
             } else {
 
@@ -100,47 +98,48 @@ class DevotionalAdminFragment : Fragment() {
     }
 
 
-        private fun dataTextWatchers(view: EditText) {
+    private fun dataTextWatchers(view: EditText) {
         val watcher: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                when (view) {
-                    binding.dateText -> {
-                        devotionalAdminViewModel.saveDate(binding.dateText.text.toString())
-                    }
-                    binding.actionPointBody -> {
-                        devotionalAdminViewModel.saveActionPoints(binding.actionPointBody.text.toString())
-                    }
-                    binding.scripture -> {
-                        devotionalAdminViewModel.saveScripture(binding.scripture.text.toString())
-                    }
-                    binding.scriptureBody -> {
-                        devotionalAdminViewModel.saveScriptureBody(binding.scriptureBody.text.toString())
-                    }
-                    binding.qualifierText -> {
-                        devotionalAdminViewModel.saveQualifier(binding.qualifierText.text.toString())
-                    }
-                    binding.bodyText -> {
-                        devotionalAdminViewModel.saveDevotionalBody(binding.bodyText.text.toString())
-                    }
-                    binding.nuggetText -> {
-                        devotionalAdminViewModel.saveNugget(binding.nuggetText.text.toString())
-                    }
-                    binding.prayerBody -> {
-                        devotionalAdminViewModel.savePrayer(binding.prayerBody.text.toString())
-                    }
-                    binding.topicText -> {
-                        devotionalAdminViewModel.saveTopic(binding.topicText.text.toString())
-                    }
-                    binding.morningText -> {
-                        devotionalAdminViewModel.saveMorning(binding.morningText.text.toString())
-                    }
-                    binding.eveningText -> {
-                        devotionalAdminViewModel.saveEvening(binding.evening.text.toString())
-                    }
-                }
+
+//                when (view) {
+//                    binding.dateText -> {
+//                        devotionalAdminViewModel.saveDate(binding.dateText.text.toString())
+//                    }
+//                    binding.actionPointBody -> {
+//                        devotionalAdminViewModel.saveActionPoints(binding.actionPointBody.text.toString())
+//                    }
+//                    binding.scripture -> {
+//                        devotionalAdminViewModel.saveScripture(binding.scripture.text.toString())
+//                    }
+//                    binding.scriptureBody -> {
+//                        devotionalAdminViewModel.saveScriptureBody(binding.scriptureBody.text.toString())
+//                    }
+//                    binding.qualifierText -> {
+//                        devotionalAdminViewModel.saveQualifier(binding.qualifierText.text.toString())
+//                    }
+//                    binding.bodyText -> {
+//                        devotionalAdminViewModel.saveDevotionalBody(binding.bodyText.text.toString())
+//                    }
+//                    binding.nuggetText -> {
+//                        devotionalAdminViewModel.saveNugget(binding.nuggetText.text.toString())
+//                    }
+//                    binding.prayerBody -> {
+//                        devotionalAdminViewModel.savePrayer(binding.prayerBody.text.toString())
+//                    }
+//                    binding.topicText -> {
+//                        devotionalAdminViewModel.saveTopic(binding.topicText.text.toString())
+//                    }
+//                    binding.morningText -> {
+//                        devotionalAdminViewModel.saveMorning(binding.morningText.text.toString())
+//                    }
+//                    binding.eveningText -> {
+//                        devotionalAdminViewModel.saveEvening(binding.evening.text.toString())
+//                    }
+//                }
 
             }
 
