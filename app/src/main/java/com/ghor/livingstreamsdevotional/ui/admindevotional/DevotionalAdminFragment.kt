@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
@@ -32,39 +33,39 @@ class DevotionalAdminFragment : Fragment() {
         _binding = FragmentAdminDevotionalBinding.inflate(inflater, container, false)
 
 
-        devotionalAdminViewModel.date.observe(this, {
-            binding.dateText.setText(it)
-        })
-        devotionalAdminViewModel.topic.observe(this, {
-            binding.topicText.setText(it)
-        })
-        devotionalAdminViewModel.scripture.observe(this, {
-            binding.scripture.setText(it)
-        })
-        devotionalAdminViewModel.scriptureBody.observe(this, {
-            binding.scriptureBody.setText(it)
-        })
-        devotionalAdminViewModel.devotionalBody.observe(this, {
-            binding.bodyText.setText(it)
-        })
-        devotionalAdminViewModel.nuggets.observe(this, {
-            binding.nuggetText.setText(it)
-        })
-        devotionalAdminViewModel.prayer.observe(this, {
-            binding.prayerBody.setText(it)
-        })
-        devotionalAdminViewModel.actionPoints.observe(this, {
-            binding.actionPointBody.setText(it)
-        })
-        devotionalAdminViewModel.qualifier.observe(this, {
-            binding.qualifierText.setText(it)
-        })
-        devotionalAdminViewModel.morning.observe(this, {
-            binding.morningText.setText(it)
-        })
-        devotionalAdminViewModel.evening.observe(this, {
-            binding.eveningText.setText(it)
-        })
+//        devotionalAdminViewModel.date.observe(this, {
+//            binding.dateText.setText(it)
+//        })
+//        devotionalAdminViewModel.topic.observe(this, {
+//            binding.topicText.setText(it)
+//        })
+//        devotionalAdminViewModel.scripture.observe(this, {
+//            binding.scripture.setText(it)
+//        })
+//        devotionalAdminViewModel.scriptureBody.observe(this, {
+//            binding.scriptureBody.setText(it)
+//        })
+//        devotionalAdminViewModel.devotionalBody.observe(this, {
+//            binding.bodyText.setText(it)
+//        })
+//        devotionalAdminViewModel.nuggets.observe(this, {
+//            binding.nuggetText.setText(it)
+//        })
+//        devotionalAdminViewModel.prayer.observe(this, {
+//            binding.prayerBody.setText(it)
+//        })
+//        devotionalAdminViewModel.actionPoints.observe(this, {
+//            binding.actionPointBody.setText(it)
+//        })
+//        devotionalAdminViewModel.qualifier.observe(this, {
+//            binding.qualifierText.setText(it)
+//        })
+//        devotionalAdminViewModel.morning.observe(this, {
+//            binding.morningText.setText(it)
+//        })
+//        devotionalAdminViewModel.evening.observe(this, {
+//            binding.eveningText.setText(it)
+//        })
 
 
 
@@ -89,8 +90,41 @@ class DevotionalAdminFragment : Fragment() {
 
     }
 
+    private fun handleClicks() {
 
-    private fun dataTextWatchers(view: EditText) {
+        //on click of login button
+        binding.loginBt.setOnClickListener {
+
+            //here you can check for network availability first, if the network is available, continue
+            if (Utility.isNetworkAvailable(context)) {
+
+                //show loading
+                binding.loadingLogin.visibility = VISIBLE
+                binding.loginBt.isEnabled = false
+
+
+                //save to viewModel
+//                authSharedViewModel.emailValue(binding.emailText.text.toString())
+//                authSharedViewModel.regNoValue(binding.regNoText.text.toString())
+                //check if already exist
+//                checkEmailExistsOrNot(
+//                    binding.emailText.text.toString(),
+//                    binding.regNoText.text.toString()
+//                )
+                login(binding.loginEmail.text.toString(), binding.loginPassword.text.toString())
+
+            } else {
+
+                Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
+
+            }
+
+        }
+
+    }
+
+
+        private fun dataTextWatchers(view: EditText) {
         val watcher: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
