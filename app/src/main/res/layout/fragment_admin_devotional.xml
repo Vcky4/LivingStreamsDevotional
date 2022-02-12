@@ -85,10 +85,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/body_text"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:hint="Devotional body"
-                android:inputType="textLongMessage"
-                android:textColorHint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/action_point_card"
