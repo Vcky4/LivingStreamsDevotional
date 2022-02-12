@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import com.ghor.livingstreamsdevotional.databinding.FragmentAdminDevotionalBinding
+import com.ghor.livingstreamsdevotional.ui.adminauthentication.Utility
 
 class DevotionalAdminFragment : Fragment() {
 
@@ -75,6 +77,10 @@ class DevotionalAdminFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //handle clicks
+        handleClicks()
+
+        //save text changes
         dataTextWatchers(binding.eveningText)
         dataTextWatchers(binding.morningText)
         dataTextWatchers(binding.dateText)
@@ -93,25 +99,17 @@ class DevotionalAdminFragment : Fragment() {
     private fun handleClicks() {
 
         //on click of login button
-        binding.loginBt.setOnClickListener {
+        binding.postBt.setOnClickListener {
 
             //here you can check for network availability first, if the network is available, continue
             if (Utility.isNetworkAvailable(context)) {
 
                 //show loading
-                binding.loadingLogin.visibility = VISIBLE
-                binding.loginBt.isEnabled = false
+                binding.loadingPost.visibility = VISIBLE
+                binding.postBt.isEnabled = false
 
 
-                //save to viewModel
-//                authSharedViewModel.emailValue(binding.emailText.text.toString())
-//                authSharedViewModel.regNoValue(binding.regNoText.text.toString())
-                //check if already exist
-//                checkEmailExistsOrNot(
-//                    binding.emailText.text.toString(),
-//                    binding.regNoText.text.toString()
-//                )
-                login(binding.loginEmail.text.toString(), binding.loginPassword.text.toString())
+            //do the postiong here
 
             } else {
 
