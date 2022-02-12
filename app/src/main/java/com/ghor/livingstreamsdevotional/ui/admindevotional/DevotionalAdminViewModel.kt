@@ -15,6 +15,8 @@ class DevotionalAdminViewModel : ViewModel() {
     private val _prayer = MutableLiveData<String>()
     private val _nuggets = MutableLiveData<String>()
     private val _qualifier = MutableLiveData<String>()
+    private val _morning = MutableLiveData<String>()
+    private val _evening = MutableLiveData<String>()
 
 
     val date: LiveData<String> = _date
@@ -26,6 +28,8 @@ class DevotionalAdminViewModel : ViewModel() {
     val prayer: LiveData<String> = _prayer
     val nuggets: LiveData<String> = _nuggets
     val qualifier: LiveData<String> = _qualifier
+    val morning: LiveData<String> = _morning
+    val evening: LiveData<String> = _evening
 
     fun saveDate(date: String) {
         _date.value = date
@@ -61,6 +65,14 @@ class DevotionalAdminViewModel : ViewModel() {
 
     fun saveQualifier(qualifier: String) {
         _qualifier.value = qualifier
+    }
+
+    fun saveMorning(morning: String) {
+        _morning.value = morning
+    }
+
+    fun saveEvening(evening: String) {
+        _evening.value = evening
     }
 
 }
