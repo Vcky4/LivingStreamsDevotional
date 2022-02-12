@@ -35,39 +35,17 @@ class DevotionalAdminFragment : Fragment() {
         _binding = FragmentAdminDevotionalBinding.inflate(inflater, container, false)
 
 
-//        devotionalAdminViewModel.date.observe(this, {
-//            binding.dateText.setText(it)
-//        })
-//        devotionalAdminViewModel.topic.observe(this, {
+            binding.dateText.setText(devotionalAdminViewModel.date)
 //            binding.topicText.setText(it)
-//        })
-//        devotionalAdminViewModel.scripture.observe(this, {
 //            binding.scripture.setText(it)
-//        })
-//        devotionalAdminViewModel.scriptureBody.observe(this, {
 //            binding.scriptureBody.setText(it)
-//        })
-//        devotionalAdminViewModel.devotionalBody.observe(this, {
 //            binding.bodyText.setText(it)
-//        })
-//        devotionalAdminViewModel.nuggets.observe(this, {
 //            binding.nuggetText.setText(it)
-//        })
-//        devotionalAdminViewModel.prayer.observe(this, {
 //            binding.prayerBody.setText(it)
-//        })
-//        devotionalAdminViewModel.actionPoints.observe(this, {
 //            binding.actionPointBody.setText(it)
-//        })
-//        devotionalAdminViewModel.qualifier.observe(this, {
 //            binding.qualifierText.setText(it)
-//        })
-//        devotionalAdminViewModel.morning.observe(this, {
 //            binding.morningText.setText(it)
-//        })
-//        devotionalAdminViewModel.evening.observe(this, {
 //            binding.eveningText.setText(it)
-//        })
 
 
 
@@ -109,7 +87,7 @@ class DevotionalAdminFragment : Fragment() {
                 binding.postBt.isEnabled = false
 
 
-            //do the postiong here
+            //do the posting here
 
             } else {
 
@@ -128,10 +106,6 @@ class DevotionalAdminFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-            }
-
-
-            override fun afterTextChanged(s: Editable?) {
                 when (view) {
                     binding.dateText -> {
                         devotionalAdminViewModel.saveDate(binding.dateText.text.toString())
@@ -167,6 +141,11 @@ class DevotionalAdminFragment : Fragment() {
                         devotionalAdminViewModel.saveEvening(binding.evening.text.toString())
                     }
                 }
+
+            }
+
+
+            override fun afterTextChanged(s: Editable?) {
             }
 
         }
