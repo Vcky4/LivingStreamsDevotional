@@ -45,7 +45,9 @@ private var _binding: FragmentAdminNuggetBinding? = null
     binding.nuggetRecycler.adapter = adapter
 
     nuggetAdminViewModel.nuggets.observe(this,{
-      adapter.setUpNuggets(it)
+      if(it != null){
+        adapter.setUpNuggets(it)
+      }
     })
 
 
