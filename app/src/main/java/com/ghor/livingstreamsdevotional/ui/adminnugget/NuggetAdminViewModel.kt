@@ -30,7 +30,7 @@ class NuggetAdminViewModel : ViewModel() {
         database.child("nuggets")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    _nuggets.value = dataSnapshot.child("value").value as List<NuggetData>?
+                    _nuggets.value = listOf(NuggetData(dataSnapshot.child("value").value.toString()))
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {

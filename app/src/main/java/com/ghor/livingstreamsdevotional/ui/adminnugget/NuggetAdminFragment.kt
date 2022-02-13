@@ -31,7 +31,6 @@ private var _binding: FragmentAdminNuggetBinding? = null
 
     _binding = FragmentAdminNuggetBinding.inflate(inflater, container, false)
 
-    handleClicks()
     nuggetTextWatchers()
     return binding.root
   }
@@ -42,11 +41,34 @@ private var _binding: FragmentAdminNuggetBinding? = null
     val adapter = AdminNuggetAdapter()
     binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
     binding.nuggetRecycler.adapter = adapter
-    binding.nuggetRecycler.adapter = adapter
 
     nuggetAdminViewModel.nuggets.observe(this,{
       if(it != null){
         adapter.setUpNuggets(it)
+      }
+
+      //on click of send button
+      binding.sendBt.setOnClickListener {
+
+        //here you can check for network availability first, if the network is available, continue
+        if (Utility.isNetworkAvailable(context)) {
+
+          nuggetAdminViewModel.addNugget(binding.nuggetText.text.toString())
+
+//          nuggetAdminViewModel.readNugget()
+          binding.nuggetText.text?.clear()
+
+
+          nuggetAdminViewModel.nuggets.observe(this,{
+            AdminNuggetAdapter().setUpNuggets(it)
+          })
+
+        } else {
+
+          Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
+
+        }
+
       }
     })
 
@@ -55,7 +77,7 @@ private var _binding: FragmentAdminNuggetBinding? = null
 
   private fun handleClicks() {
 
-    //on click of login button
+    //on click of send button
     binding.sendBt.setOnClickListener {
 
       //here you can check for network availability first, if the network is available, continue
