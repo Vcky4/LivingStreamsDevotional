@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ghor.livingstreamsdevotional.ui.nuggets.NuggetData
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -23,6 +24,13 @@ class NuggetAdminViewModel : ViewModel() {
     }
 
     fun readNugget(){
+        database.child("nuggets")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
 
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {}
+            })
     }
 }
