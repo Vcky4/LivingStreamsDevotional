@@ -332,7 +332,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="@id/post_bt"
                 android:visibility="gone"
-                android:background="@color/white"
+                android:progressBackgroundTint="@color/white"
                 app:layout_constraintStart_toStartOf="@id/post_bt"
                 app:layout_constraintTop_toTopOf="@id/post_bt"
                 app:layout_constraintBottom_toBottomOf="@id/post_bt"/>

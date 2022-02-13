@@ -84,6 +84,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             android:visibility="gone"
+            android:progressBackgroundTint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="30dp"
             app:layout_constraintBottom_toTopOf="@id/login_bt"
