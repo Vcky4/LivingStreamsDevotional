@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ghor.livingstreamsdevotional.ui.nuggets.NuggetData
+import com.google.firebase.ktx.Firebase
 
 class NuggetAdminViewModel : ViewModel() {
 
+    private val database: DatabaseReference = Firebase.database.reference
 
     private val nuggetsList =  mutableListOf<NuggetData>(
         NuggetData("God is love and He loves you no matter what"),
@@ -22,5 +24,9 @@ class NuggetAdminViewModel : ViewModel() {
 
     fun addNugget(nugget: String){
         nuggetsList.add(NuggetData(nugget))
+    }
+
+    fun writeNugget(nugget: String){
+        database.child(nuggets).setValue(nugget)
     }
 }
