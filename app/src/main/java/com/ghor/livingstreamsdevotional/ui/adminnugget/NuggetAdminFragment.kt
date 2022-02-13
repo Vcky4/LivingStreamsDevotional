@@ -47,30 +47,32 @@ private var _binding: FragmentAdminNuggetBinding? = null
         adapter.setUpNuggets(it)
       }
 
-      //on click of send button
-      binding.sendBt.setOnClickListener {
 
-        //here you can check for network availability first, if the network is available, continue
-        if (Utility.isNetworkAvailable(context)) {
+    })
 
-          nuggetAdminViewModel.addNugget(binding.nuggetText.text.toString())
+    //on click of send button
+    binding.sendBt.setOnClickListener {
 
-//          nuggetAdminViewModel.readNugget()
-          binding.nuggetText.text?.clear()
+      //here you can check for network availability first, if the network is available, continue
+      if (Utility.isNetworkAvailable(context)) {
+
+        nuggetAdminViewModel.addNugget(binding.nuggetText.text.toString())
+
+        nuggetAdminViewModel.readNugget()
+        binding.nuggetText.text?.clear()
 
 
-          nuggetAdminViewModel.nuggets.observe(this,{
-            AdminNuggetAdapter().setUpNuggets(it)
-          })
+        nuggetAdminViewModel.nuggets.observe(this,{
+          AdminNuggetAdapter().setUpNuggets(it)
+        })
 
-        } else {
+      } else {
 
-          Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
-
-        }
+        Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
 
       }
-    })
+
+    }
 
 
   }
