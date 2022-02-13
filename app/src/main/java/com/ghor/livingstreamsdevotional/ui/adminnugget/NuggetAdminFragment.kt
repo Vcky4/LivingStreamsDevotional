@@ -42,21 +42,26 @@ private var _binding: FragmentAdminNuggetBinding? = null
     _binding = FragmentAdminNuggetBinding.inflate(inflater, container, false)
 
     nuggetTextWatchers()
-    return binding.root
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
+    nuggetAdminViewModel.getNuggets()
 
     val adapter = AdminNuggetAdapter()
     binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
     binding.nuggetRecycler.adapter = adapter
+
 
     nuggetAdminViewModel.nuggets.observe(this,{
       if(it != null){
         adapter.setUpNuggets(it)
       }
     })
+
+    return binding.root
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+
 
 
     //on click of send button

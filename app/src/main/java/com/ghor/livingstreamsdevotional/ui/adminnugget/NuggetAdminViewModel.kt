@@ -23,32 +23,6 @@ class NuggetAdminViewModel : ViewModel() {
 
     val nuggets: LiveData<List<String>> = _nuggets
 
-    fun addNugget(nugget: String){
-        val key = database.child("posts").push().key
-        if (key == null) {
-            Log.w(TAG, "Couldn't get push key for posts")
-            return
-        }
-
-        val post = NuggetData(nugget)
-        val postValues = post.toMap()
-
-        val childUpdates = hashMapOf<String, Any>(
-            "/posts/$key" to postValues,
-            "/user-posts/$key" to postValues
-        )
-
-        database.updateChildren(childUpdates)
-            .addOnSuccessListener {
-                // Write was successful!
-                // ...
-            }
-            .addOnFailureListener {
-                // Write failed
-                // ...
-            }
-
-    }
 
     fun readNugget(){
         database.child("nuggets")
@@ -65,11 +39,11 @@ class NuggetAdminViewModel : ViewModel() {
 
 
     fun getNuggets() {
-        val ref = database.child("posts").child("nugget").ref
+        val ref = database.child("posts").ref
         val menuListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (dataValues in dataSnapshot.children) {
-                    val game = dataValues.value.toString()
+                    val game = dataValues.child("nugget").value.toString()
                     nuggetsList.add(game)
                 }
                 _nuggets.value = nuggetsList
