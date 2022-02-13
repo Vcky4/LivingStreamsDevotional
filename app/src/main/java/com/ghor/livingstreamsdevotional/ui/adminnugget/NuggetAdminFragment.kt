@@ -69,7 +69,7 @@ private var _binding: FragmentAdminNuggetBinding? = null
 
         addNugget(binding.nuggetText.text.toString())
 
-//        nuggetAdminViewModel.readNugget()
+        nuggetAdminViewModel.getNuggets()
         binding.nuggetText.text?.clear()
 
 
@@ -82,9 +82,7 @@ private var _binding: FragmentAdminNuggetBinding? = null
         Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
 
       }
-
     }
-
 
   }
 
@@ -127,7 +125,7 @@ private var _binding: FragmentAdminNuggetBinding? = null
     val postValues = post.toMap()
 
     val childUpdates = hashMapOf<String, Any>(
-      "/posts/" to postValues
+      "/posts/$key" to postValues
     )
 
     database.updateChildren(childUpdates)

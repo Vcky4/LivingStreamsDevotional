@@ -18,10 +18,10 @@ class NuggetAdminViewModel : ViewModel() {
 
     private val database: DatabaseReference = Firebase.database.reference
 
-    private val nuggetsList =  mutableListOf<NuggetData>()
-    private val _nuggets = MutableLiveData<List<NuggetData>>()
+    private val nuggetsList =  mutableListOf<String>()
+    private val _nuggets = MutableLiveData<List<String>>()
 
-    val nuggets: LiveData<List<NuggetData>> = _nuggets
+    val nuggets: LiveData<List<String>> = _nuggets
 
     fun addNugget(nugget: String){
         val key = database.child("posts").push().key
@@ -54,12 +54,30 @@ class NuggetAdminViewModel : ViewModel() {
         database.child("nuggets")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    _nuggets.value = dataSnapshot.value as List<NuggetData>?
+                    _nuggets.value = dataSnapshot.value as List<String>?
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
                     Log.d("nugget", databaseError.message)
                 }
             })
+    }
+
+
+    fun getNuggets() {
+        val ref = database.child("posts").child("nugget").ref
+        val menuListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (dataValues in dataSnapshot.children) {
+                    val game = dataValues.value.toString()
+                    nuggetsList.add(game)
+                }
+                _nuggets.value = nuggetsList
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // handle error
+            }
+        }
+        ref.addListenerForSingleValueEvent(menuListener)
     }
 }
