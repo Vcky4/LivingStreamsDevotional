@@ -65,9 +65,11 @@ private var _binding: FragmentAdminNuggetBinding? = null
       //here you can check for network availability first, if the network is available, continue
       if (Utility.isNetworkAvailable(context)) {
 
-        nuggetAdminViewModel.addNugget(binding.nuggetText.text.toString())
+//        nuggetAdminViewModel.addNugget(binding.nuggetText.text.toString())
 
-        nuggetAdminViewModel.readNugget()
+        addNugget(binding.nuggetText.text.toString())
+
+//        nuggetAdminViewModel.readNugget()
         binding.nuggetText.text?.clear()
 
 
@@ -97,7 +99,7 @@ private var _binding: FragmentAdminNuggetBinding? = null
         addNugget(binding.nuggetText.text.toString())
 //        nuggetAdminViewModel.addNugget(binding.nuggetText.text.toString())
 
-        nuggetAdminViewModel.readNugget()
+//        nuggetAdminViewModel.readNugget()
         binding.nuggetText.text?.clear()
 
 
@@ -125,8 +127,7 @@ private var _binding: FragmentAdminNuggetBinding? = null
     val postValues = post.toMap()
 
     val childUpdates = hashMapOf<String, Any>(
-      "/posts/$key" to postValues,
-      "/user-posts/$key" to postValues
+      "/posts/" to postValues
     )
 
     database.updateChildren(childUpdates)
