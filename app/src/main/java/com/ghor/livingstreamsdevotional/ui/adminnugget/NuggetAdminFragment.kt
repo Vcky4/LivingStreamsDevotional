@@ -42,9 +42,9 @@ private var _binding: FragmentAdminNuggetBinding? = null
     val adapter = AdminNuggetAdapter()
     binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
     binding.nuggetRecycler.adapter = adapter
+    binding.nuggetRecycler.adapter = adapter
 
     nuggetAdminViewModel.nuggets.observe(this,{
-      binding.nuggetRecycler.adapter = adapter
       adapter.setUpNuggets(it)
     })
 
@@ -60,7 +60,10 @@ private var _binding: FragmentAdminNuggetBinding? = null
       if (Utility.isNetworkAvailable(context)) {
 
         nuggetAdminViewModel.addNugget(binding.nuggetText.text.toString())
+
+        nuggetAdminViewModel.readNugget()
         binding.nuggetText.text?.clear()
+
 
         nuggetAdminViewModel.nuggets.observe(this,{
           AdminNuggetAdapter().setUpNuggets(it)
