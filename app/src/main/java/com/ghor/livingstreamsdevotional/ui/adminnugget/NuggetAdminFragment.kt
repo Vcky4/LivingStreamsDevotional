@@ -1,5 +1,6 @@
 package com.ghor.livingstreamsdevotional.ui.adminnugget
 
+import android.content.ContentValues
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -93,7 +94,8 @@ private var _binding: FragmentAdminNuggetBinding? = null
       //here you can check for network availability first, if the network is available, continue
       if (Utility.isNetworkAvailable(context)) {
 
-        nuggetAdminViewModel.addNugget(binding.nuggetText.text.toString())
+        addNugget(binding.nuggetText.text.toString())
+//        nuggetAdminViewModel.addNugget(binding.nuggetText.text.toString())
 
         nuggetAdminViewModel.readNugget()
         binding.nuggetText.text?.clear()
@@ -110,6 +112,35 @@ private var _binding: FragmentAdminNuggetBinding? = null
       }
 
     }
+  }
+
+  private fun addNugget(nugget: String){
+    val key = database.child("posts").push().key
+    if (key == null) {
+      Log.w(ContentValues.TAG, "Couldn't get push key for posts")
+      return
+    }
+
+    val post = NuggetData(nugget)
+    val postValues = post.toMap()
+
+    val childUpdates = hashMapOf<String, Any>(
+      "/posts/$key" to postValues,
+      "/user-posts/$key" to postValues
+    )
+
+    database.updateChildren(childUpdates)
+      .addOnSuccessListener {
+        // Write was successful!
+        Toast.makeText(context, "posted!", Toast.LENGTH_SHORT).show()
+        // ...
+      }
+      .addOnFailureListener {
+        // Write failed
+        Toast.makeText(context, "post failed!", Toast.LENGTH_SHORT).show()
+        // ...
+      }
+
   }
 
   private fun nuggetTextWatchers() {
