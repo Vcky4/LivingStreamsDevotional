@@ -3,6 +3,7 @@ package com.ghor.livingstreamsdevotional.ui.adminnugget
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +13,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ghor.livingstreamsdevotional.databinding.FragmentAdminNuggetBinding
 import com.ghor.livingstreamsdevotional.ui.adminauthentication.Utility
+import com.ghor.livingstreamsdevotional.ui.nuggets.NuggetData
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class NuggetAdminFragment : Fragment() {
 
+  private val database: DatabaseReference = Firebase.database.reference
   private lateinit var nuggetAdminViewModel: NuggetAdminViewModel
 private var _binding: FragmentAdminNuggetBinding? = null
   // This property is only valid between onCreateView and
@@ -46,9 +55,8 @@ private var _binding: FragmentAdminNuggetBinding? = null
       if(it != null){
         adapter.setUpNuggets(it)
       }
-
-
     })
+
 
     //on click of send button
     binding.sendBt.setOnClickListener {
@@ -91,9 +99,9 @@ private var _binding: FragmentAdminNuggetBinding? = null
         binding.nuggetText.text?.clear()
 
 
-        nuggetAdminViewModel.nuggets.observe(this,{
-          AdminNuggetAdapter().setUpNuggets(it)
-        })
+//        nuggetAdminViewModel.nuggets.observe(this,{
+//          AdminNuggetAdapter().setUpNuggets(it)
+//        })
 
       } else {
 

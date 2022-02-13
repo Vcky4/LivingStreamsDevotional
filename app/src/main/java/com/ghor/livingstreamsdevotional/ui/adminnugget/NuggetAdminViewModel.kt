@@ -23,14 +23,14 @@ class NuggetAdminViewModel : ViewModel() {
 
     fun addNugget(nugget: String){
         nuggetsList.add(NuggetData(nugget))
-        database.child("nuggets").setValue(nugget)
+        database.child("nuggets").setValue(nuggetsList)
     }
 
     fun readNugget(){
         database.child("nuggets")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    _nuggets.value = listOf(NuggetData(dataSnapshot.child("value").value.toString()))
+                    _nuggets.value = dataSnapshot.value as List<NuggetData>?
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
