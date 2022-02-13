@@ -23,7 +23,7 @@ class NuggetAdminViewModel : ViewModel() {
 
     fun addNugget(nugget: String){
         nuggetsList.add(NuggetData(nugget))
-        database.child("nuggets").setValue(nuggetsList)
+        database.child("nuggets").setValue(nugget)
     }
 
     fun readNugget(){
@@ -34,7 +34,7 @@ class NuggetAdminViewModel : ViewModel() {
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
-                    Log.d("nugget", "$databaseError")
+                    Log.d("nugget", databaseError.message)
                 }
             })
     }
