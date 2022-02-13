@@ -22,6 +22,5 @@ class NuggetAdminViewModel : ViewModel() {
 
     fun addNugget(nugget: String){
         nuggetsList.add(NuggetData(nugget))
-
     }
 }

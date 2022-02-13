@@ -44,6 +44,7 @@ private var _binding: FragmentAdminNuggetBinding? = null
     binding.nuggetRecycler.adapter = adapter
 
     nuggetAdminViewModel.nuggets.observe(this,{
+      binding.nuggetRecycler.adapter = adapter
       adapter.setUpNuggets(it)
     })
 
@@ -59,6 +60,11 @@ private var _binding: FragmentAdminNuggetBinding? = null
       if (Utility.isNetworkAvailable(context)) {
 
         nuggetAdminViewModel.addNugget(binding.nuggetText.text.toString())
+        binding.nuggetText.text?.clear()
+
+        nuggetAdminViewModel.nuggets.observe(this,{
+          AdminNuggetAdapter().setUpNuggets(it)
+        })
 
       } else {
 
