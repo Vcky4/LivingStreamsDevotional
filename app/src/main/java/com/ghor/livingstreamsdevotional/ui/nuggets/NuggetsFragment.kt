@@ -28,6 +28,8 @@ class NuggetsFragment : Fragment() {
 
         _binding = FragmentNuggetsBinding.inflate(inflater, container, false)
 
+        nuggetsViewModel.getNuggets()
+
         return binding.root
     }
 

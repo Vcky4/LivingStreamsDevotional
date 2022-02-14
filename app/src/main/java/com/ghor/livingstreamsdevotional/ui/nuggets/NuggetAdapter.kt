@@ -8,13 +8,13 @@ import com.ghor.livingstreamsdevotional.databinding.NuggetListItemBinding
 
 class NuggetAdapter : RecyclerView.Adapter<NuggetAdapter.NuggetViewHolder>() {
 
-    private val nuggetList = mutableListOf<NuggetData>()
+    private val nuggetList = mutableListOf<String>()
 
     inner class NuggetViewHolder(private val binding: NuggetListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindNuggets(nuggets: NuggetData) {
-            binding.nuggetsT.text = nuggets.nugget
+        fun bindNuggets(nuggets: String) {
+            binding.nuggetsT.text = nuggets
         }
 
         fun setPosition(position: Int) {
@@ -28,7 +28,7 @@ class NuggetAdapter : RecyclerView.Adapter<NuggetAdapter.NuggetViewHolder>() {
         }
     }
 
-    fun setUpNuggets(nuggets: List<NuggetData>) {
+    fun setUpNuggets(nuggets: List<String>) {
         if (nuggetList.isEmpty()) {
             this.nuggetList.addAll(nuggets)
         } else if (nuggetList.size < nuggets.size) {
