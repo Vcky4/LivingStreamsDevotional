@@ -8,11 +8,22 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ghor.livingstreamsdevotional.databinding.FragmentNuggetsBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class NuggetsFragment : Fragment() {
 
+    private val database: DatabaseReference = Firebase.database.reference
+    private val adapter = NuggetAdapter()
+
+
     private lateinit var nuggetsViewModel: NuggetsViewModel
     private var _binding: FragmentNuggetsBinding? = null
+    private val nuggetsList = mutableListOf<String>()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -28,21 +39,30 @@ class NuggetsFragment : Fragment() {
 
         _binding = FragmentNuggetsBinding.inflate(inflater, container, false)
 
-        nuggetsViewModel.getNuggets()
-
+        getNuggets()
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        val adapter = NuggetAdapter()
-        binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
-        binding.nuggetRecycler.adapter = adapter
 
-        nuggetsViewModel.nuggets.observe(this,{
-            adapter.setUpNuggets(it)
-        })
+    private fun getNuggets() {
+        val ref = database.child("posts").ref
+        val menuListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (dataValues in dataSnapshot.children) {
+                    val game = dataValues.child("nugget").value.toString()
+                    nuggetsList.add(game)
+                }
+                binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
+                binding.nuggetRecycler.adapter = adapter
+                adapter.setUpNuggets(nuggetsList)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // handle error
+            }
+        }
+        ref.addListenerForSingleValueEvent(menuListener)
     }
 
     override fun onDestroyView() {

@@ -15,27 +15,10 @@ class NuggetsViewModel : ViewModel() {
 
     private val database: DatabaseReference = Firebase.database.reference
 
-    private val nuggetsList = mutableListOf<String>()
 
-    private val _text = MutableLiveData<List<String>>()
+    private val _text = MutableLiveData<List<NuggetData>>()
 
-    val nuggets: LiveData<List<String>> = _text
+    val nuggets: LiveData<List<NuggetData>> = _text
 
-    fun getNuggets() {
-        val ref = database.child("posts").ref
-        val menuListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (dataValues in dataSnapshot.children) {
-                    val game = dataValues.child("nugget").value.toString()
-                    nuggetsList.add(game)
-                }
-               _text.value = nuggetsList
-            }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                // handle error
-            }
-        }
-        ref.addListenerForSingleValueEvent(menuListener)
-    }
 }
