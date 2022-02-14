@@ -3,6 +3,7 @@ package com.ghor.livingstreamsdevotional.ui.nuggets
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -55,7 +56,9 @@ class NuggetsFragment : Fragment() {
                 }
                 binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
                 binding.nuggetRecycler.adapter = adapter
+                binding.loadingPost.visibility = GONE
                 adapter.setUpNuggets(nuggetsList)
+
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
