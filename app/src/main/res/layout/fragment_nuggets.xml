@@ -31,4 +31,13 @@
         android:layout_marginBottom="30dp"
         tools:listitem="@layout/nugget_list_item"/>
 
+    <ProgressBar
+        android:id="@+id/loading_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/nugget_recycler"
+        app:layout_constraintStart_toStartOf="@id/nugget_recycler"
+        app:layout_constraintTop_toTopOf="@id/nugget_recycler"
+        app:layout_constraintBottom_toBottomOf="@id/nugget_recycler"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
