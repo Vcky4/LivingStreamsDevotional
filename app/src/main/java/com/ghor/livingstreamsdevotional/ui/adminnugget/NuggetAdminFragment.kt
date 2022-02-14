@@ -24,148 +24,127 @@ import com.google.firebase.ktx.Firebase
 
 class NuggetAdminFragment : Fragment() {
 
-  private val database: DatabaseReference = Firebase.database.reference
-  private lateinit var nuggetAdminViewModel: NuggetAdminViewModel
-private var _binding: FragmentAdminNuggetBinding? = null
-  // This property is only valid between onCreateView and
-  // onDestroyView.
-  private val binding get() = _binding!!
-
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    nuggetAdminViewModel =
-      ViewModelProvider(this)[NuggetAdminViewModel::class.java]
-
-    _binding = FragmentAdminNuggetBinding.inflate(inflater, container, false)
-
-    nuggetTextWatchers()
-    nuggetAdminViewModel.getNuggets()
-
-    val adapter = AdminNuggetAdapter()
-    binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
-    binding.nuggetRecycler.adapter = adapter
+    private val database: DatabaseReference = Firebase.database.reference
+    private lateinit var nuggetAdminViewModel: NuggetAdminViewModel
+    private val nuggetsList = mutableListOf<String>()
+    private val adapter = AdminNuggetAdapter()
 
 
-    nuggetAdminViewModel.nuggets.observe(this,{
-      if(it != null){
-        adapter.setUpNuggets(it)
-      }
-    })
+    private var _binding: FragmentAdminNuggetBinding? = null
 
-    return binding.root
-  }
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        nuggetAdminViewModel =
+            ViewModelProvider(this)[NuggetAdminViewModel::class.java]
 
+        _binding = FragmentAdminNuggetBinding.inflate(inflater, container, false)
 
-
-
-    //on click of send button
-    binding.sendBt.setOnClickListener {
-
-      //here you can check for network availability first, if the network is available, continue
-      if (Utility.isNetworkAvailable(context)) {
-
-//        nuggetAdminViewModel.addNugget(binding.nuggetText.text.toString())
-
-        addNugget(binding.nuggetText.text.toString())
-
-        nuggetAdminViewModel.getNuggets()
-        binding.nuggetText.text?.clear()
+        handleClicks()
+        nuggetTextWatchers()
+        getNuggets()
 
 
-        nuggetAdminViewModel.nuggets.observe(this,{
-          AdminNuggetAdapter().setUpNuggets(it)
-        })
-
-      } else {
-
-        Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
-
-      }
+        return binding.root
     }
 
-  }
 
-  private fun handleClicks() {
+    private fun handleClicks() {
 
-    //on click of send button
-    binding.sendBt.setOnClickListener {
+        //on click of send button
+        binding.sendBt.setOnClickListener {
 
-      //here you can check for network availability first, if the network is available, continue
-      if (Utility.isNetworkAvailable(context)) {
-
-        addNugget(binding.nuggetText.text.toString())
-//        nuggetAdminViewModel.addNugget(binding.nuggetText.text.toString())
-
-//        nuggetAdminViewModel.readNugget()
-        binding.nuggetText.text?.clear()
+            //here you can check for network availability first, if the network is available, continue
+            if (Utility.isNetworkAvailable(context)) {
 
 
-//        nuggetAdminViewModel.nuggets.observe(this,{
-//          AdminNuggetAdapter().setUpNuggets(it)
-//        })
+                addNugget(binding.nuggetText.text.toString())
 
-      } else {
+                getNuggets()
+                binding.nuggetText.text?.clear()
 
-        Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
+            } else {
 
-      }
+                Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
 
-    }
-  }
+            }
 
-  private fun addNugget(nugget: String){
-    val key = database.child("posts").push().key
-    if (key == null) {
-      Log.w(ContentValues.TAG, "Couldn't get push key for posts")
-      return
+        }
     }
 
-    val post = NuggetData(nugget)
-    val postValues = post.toMap()
 
-    val childUpdates = hashMapOf<String, Any>(
-      "/posts/$key" to postValues
-    )
+    private fun getNuggets() {
+        val ref = database.child("posts").ref
+        val menuListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (dataValues in dataSnapshot.children) {
+                    val game = dataValues.child("nugget").value.toString()
+                    nuggetsList.add(game)
+                }
+                binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
+                binding.nuggetRecycler.adapter = adapter
+                adapter.setUpNuggets(nuggetsList)
+            }
 
-    database.updateChildren(childUpdates)
-      .addOnSuccessListener {
-        // Write was successful!
-        Toast.makeText(context, "posted!", Toast.LENGTH_SHORT).show()
-        // ...
-      }
-      .addOnFailureListener {
-        // Write failed
-        Toast.makeText(context, "post failed!", Toast.LENGTH_SHORT).show()
-        // ...
-      }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // handle error
+            }
+        }
+        ref.addListenerForSingleValueEvent(menuListener)
+    }
 
-  }
+    private fun addNugget(nugget: String) {
+        val key = database.child("posts").push().key
+        if (key == null) {
+            Log.w(ContentValues.TAG, "Couldn't get push key for posts")
+            return
+        }
 
-  private fun nuggetTextWatchers() {
-    val watcher: TextWatcher = object : TextWatcher {
-      override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        val post = NuggetData(nugget)
+        val postValues = post.toMap()
 
-      override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        val s1 = binding.nuggetText.text.toString()
+        val childUpdates = hashMapOf<String, Any>(
+            "/posts/$key" to postValues
+        )
 
-        //check if they are empty, make button not clickable
-        binding.sendBt.isEnabled = s1.isNotEmpty()
-
-      }
-
-
-      override fun afterTextChanged(s: Editable?) {}
+        database.updateChildren(childUpdates)
+            .addOnSuccessListener {
+                // Write was successful!
+                Toast.makeText(context, "posted!", Toast.LENGTH_SHORT).show()
+                // ...
+            }
+            .addOnFailureListener {
+                // Write failed
+                Toast.makeText(context, "post failed!", Toast.LENGTH_SHORT).show()
+                // ...
+            }
 
     }
-    binding.nuggetText.addTextChangedListener(watcher)
-  }
 
+    private fun nuggetTextWatchers() {
+        val watcher: TextWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val s1 = binding.nuggetText.text.toString()
+
+                //check if they are empty, make button not clickable
+                binding.sendBt.isEnabled = s1.isNotEmpty()
+
+            }
+
+
+            override fun afterTextChanged(s: Editable?) {}
+
+        }
+        binding.nuggetText.addTextChangedListener(watcher)
+    }
 
 
     override fun onDestroyView() {
