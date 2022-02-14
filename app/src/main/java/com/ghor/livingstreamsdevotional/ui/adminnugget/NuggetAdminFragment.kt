@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -89,6 +90,7 @@ class NuggetAdminFragment : Fragment() {
                 }
                 binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
                 binding.nuggetRecycler.adapter = adapter
+                binding.loadingPost.visibility = GONE
                 adapter.setUpNuggets(nuggetsList)
             }
 
