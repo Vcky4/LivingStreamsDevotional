@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +21,7 @@ class NuggetsFragment : Fragment() {
 
     private val database: DatabaseReference = Firebase.database.reference
     private val adapter = NuggetAdapter()
+    private val ref = database.child("posts").ref
 
 
     private lateinit var nuggetsViewModel: NuggetsViewModel
@@ -44,10 +46,34 @@ class NuggetsFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val menuListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (dataValues in dataSnapshot.children) {
+                    val game = dataValues.child("nugget").value.toString()
+                    nuggetsList.add(game)
+                }
+                binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
+                binding.nuggetRecycler.adapter = adapter
+                binding.loadingPost.visibility = GONE
+                adapter.setUpNuggets(nuggetsList)
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // handle error
+                Toast.makeText(context, "unable to update nuggets", Toast.LENGTH_SHORT).show()
+            }
+        }
+        ref.addListenerForSingleValueEvent(menuListener)
+
+    }
+
 
 
     private fun getNuggets() {
-        val ref = database.child("posts").ref
         val menuListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (dataValues in dataSnapshot.children) {
