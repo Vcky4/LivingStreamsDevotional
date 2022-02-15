@@ -10,10 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ghor.livingstreamsdevotional.databinding.FragmentNuggetsBinding
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
+import com.ghor.livingstreamsdevotional.ui.adminauthentication.Utility
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -22,11 +20,11 @@ class NuggetsFragment : Fragment() {
     private val database: DatabaseReference = Firebase.database.reference
     private val adapter = NuggetAdapter()
     private val ref = database.child("posts").ref
+    private val _nuggets = mutableListOf<String>()
 
 
     private lateinit var nuggetsViewModel: NuggetsViewModel
     private var _binding: FragmentNuggetsBinding? = null
-    private val nuggetsList = mutableListOf<String>()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -42,57 +40,81 @@ class NuggetsFragment : Fragment() {
 
         _binding = FragmentNuggetsBinding.inflate(inflater, container, false)
 
-        getNuggets()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val menuListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (dataValues in dataSnapshot.children) {
-                    val game = dataValues.child("nugget").value.toString()
-                    nuggetsList.add(game)
+
+
+        val childEventListener = object : ChildEventListener{
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val menuListener = object : ValueEventListener {
+                    private val nuggetsList = mutableListOf<String>()
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        for (dataValues in dataSnapshot.children) {
+                            val game = dataValues.child("nugget").value.toString()
+                            nuggetsList.add(game)
+                            adapter.setUpNuggets(nuggetsList)
+                            binding.loadingPost.visibility = GONE
+                        }
+                        binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
+                        binding.nuggetRecycler.adapter = adapter
+
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        // handle error
+                        Toast.makeText(context, "unable to update nuggets", Toast.LENGTH_SHORT).show()
+                    }
                 }
-                binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
-                binding.nuggetRecycler.adapter = adapter
-                binding.loadingPost.visibility = GONE
-                adapter.setUpNuggets(nuggetsList)
-
+                ref.addListenerForSingleValueEvent(menuListener)
             }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                // handle error
-                Toast.makeText(context, "unable to update nuggets", Toast.LENGTH_SHORT).show()
-            }
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {}
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
+
+            override fun onCancelled(error: DatabaseError) {}
+
         }
-        ref.addListenerForSingleValueEvent(menuListener)
+
+        ref.addChildEventListener(childEventListener)
+
+
 
     }
 
 
 
-    private fun getNuggets() {
-        val menuListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (dataValues in dataSnapshot.children) {
-                    val game = dataValues.child("nugget").value.toString()
-                    nuggetsList.add(game)
-                }
-                binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
-                binding.nuggetRecycler.adapter = adapter
-                binding.loadingPost.visibility = GONE
-                adapter.setUpNuggets(nuggetsList)
-
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // handle error
-            }
-        }
-        ref.addListenerForSingleValueEvent(menuListener)
-    }
+//    private fun getNuggets() {
+//        val menuListener = object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                for (dataValues in dataSnapshot.children) {
+//                    val game = dataValues.child("nugget").value.toString()
+//                    nuggetsList.add(game)
+//                }
+//                binding.loadingPost.visibility = GONE
+//
+//                if (nuggetsList.size > _nuggets.size){
+//                    binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
+//                    binding.nuggetRecycler.adapter = adapter
+//                    adapter.setUpNuggets(nuggetsList)
+//                    _nuggets.add(nuggetsList.last())
+//                }
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                // handle error
+//                Toast.makeText(context, "unable to update nuggets", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//        ref.addListenerForSingleValueEvent(menuListener)
+//
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
