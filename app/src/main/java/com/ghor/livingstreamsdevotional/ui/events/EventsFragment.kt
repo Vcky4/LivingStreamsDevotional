@@ -19,7 +19,7 @@ class EventsFragment : Fragment() {
     private lateinit var eventsViewModel: EventsViewModel
     private var _binding: FragmentEventsBinding? = null
     private val database: DatabaseReference = Firebase.database.reference
-    private val ref = database.child("events").ref
+    private val ref = database.child("event").ref
     private val adapter = EventAdapter()
 
 

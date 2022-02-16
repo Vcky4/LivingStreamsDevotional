@@ -26,7 +26,7 @@ class EventAdminFragment : Fragment() {
   private lateinit var eventAdminViewModel: EventAdminViewModel
   private var _binding: FragmentAdminEventBinding? = null
   private val database: DatabaseReference = Firebase.database.reference
-  private val ref = database.child("events").ref
+  private val ref = database.child("event").ref
   private val adapter = EventAdapter()
 
   // This property is only valid between onCreateView and

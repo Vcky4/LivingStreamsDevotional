@@ -52,9 +52,8 @@ class DevotionalAdminFragment : Fragment() {
 
         //handle clicks
         handleClicks()
-
-
-
+        // check if devotional body is at least 100 character
+        dataTextWatchers()
 
     }
 
@@ -129,49 +128,15 @@ class DevotionalAdminFragment : Fragment() {
     }
 
 
-    private fun dataTextWatchers(view: EditText) {
+    private fun dataTextWatchers() {
         val watcher: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-
-//                when (view) {
-//                    binding.dateText -> {
-//                        devotionalAdminViewModel.saveDate(binding.dateText.text.toString())
-//                    }
-//                    binding.actionPointBody -> {
-//                        devotionalAdminViewModel.saveActionPoints(binding.actionPointBody.text.toString())
-//                    }
-//                    binding.scripture -> {
-//                        devotionalAdminViewModel.saveScripture(binding.scripture.text.toString())
-//                    }
-//                    binding.scriptureBody -> {
-//                        devotionalAdminViewModel.saveScriptureBody(binding.scriptureBody.text.toString())
-//                    }
-//                    binding.qualifierText -> {
-//                        devotionalAdminViewModel.saveQualifier(binding.qualifierText.text.toString())
-//                    }
-//                    binding.bodyText -> {
-//                        devotionalAdminViewModel.saveDevotionalBody(binding.bodyText.text.toString())
-//                    }
-//                    binding.nuggetText -> {
-//                        devotionalAdminViewModel.saveNugget(binding.nuggetText.text.toString())
-//                    }
-//                    binding.prayerBody -> {
-//                        devotionalAdminViewModel.savePrayer(binding.prayerBody.text.toString())
-//                    }
-//                    binding.topicText -> {
-//                        devotionalAdminViewModel.saveTopic(binding.topicText.text.toString())
-//                    }
-//                    binding.morningText -> {
-//                        devotionalAdminViewModel.saveMorning(binding.morningText.text.toString())
-//                    }
-//                    binding.eveningText -> {
-//                        devotionalAdminViewModel.saveEvening(binding.evening.text.toString())
-//                    }
-//                }
-
+                if(binding.bodyText.text?.length!! >= 100){
+                    binding.postBt.isEnabled = true
+                }
             }
 
 
@@ -179,7 +144,7 @@ class DevotionalAdminFragment : Fragment() {
             }
 
         }
-        view.addTextChangedListener(watcher)
+        binding.bodyText.addTextChangedListener(watcher)
     }
 
     override fun onDestroyView() {
