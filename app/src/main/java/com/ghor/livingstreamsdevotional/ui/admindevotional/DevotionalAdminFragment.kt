@@ -103,6 +103,8 @@ class DevotionalAdminFragment : Fragment() {
             .addOnSuccessListener {
                 // Write was successful!
                 Toast.makeText(context, "posted!", Toast.LENGTH_SHORT).show()
+                binding.loadingPost.visibility = GONE
+                binding.postBt.isEnabled = true
                 // ...
             }
             .addOnFailureListener {
@@ -113,32 +115,6 @@ class DevotionalAdminFragment : Fragment() {
 
     }
 
-    private val data = database.child("devotional")
-//    private fun postDevotional(a: String, b : String, c : String, d : String,
-//                               e : String, f : String, g : String, h : String,
-//                               i : String, j : String, k : String,){
-//
-//       data.child("-Date").child("vale").setValue(a)
-//       data.child("topic").child("value").setValue(b)
-//       data.child("qualifier").child("value").setValue(c)
-//       data.child("scripture").child("value").setValue(d)
-//       data.child("scriptureBody").child("value").setValue(e)
-//       data.child("actionPoint").child("value").setValue(f)
-//       data.child("prayer").child("value").setValue(g)
-//       data.child("nugget").child("value").setValue(h)
-//       data.child("evening").child("value").setValue(i)
-//       data.child("morning").child("value").setValue(j)
-//       data.child("body").child("value").setValue(k)
-//            .addOnSuccessListener {
-//                // Write was successful!
-//                Toast.makeText(context, "posted!", Toast.LENGTH_SHORT).show()
-//                binding.loadingPost.visibility = GONE
-//            }
-//            .addOnCanceledListener {
-//                // Write was failed!
-//                Toast.makeText(context, "post Failed!", Toast.LENGTH_SHORT).show()
-//            }
-//    }
 
     private fun handleClicks() {
 

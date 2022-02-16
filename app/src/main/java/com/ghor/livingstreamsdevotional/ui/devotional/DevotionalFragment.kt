@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
@@ -88,6 +89,7 @@ class DevotionalFragment : Fragment() {
                             binding.scripture.text = scripture
                             binding.scriptureBody.text = " '' $scriptureBody '' "
                         }
+                        binding.loadingDevotional.visibility = GONE
 
                     }
 
