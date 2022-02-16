@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ghor.livingstreamsdevotional.databinding.FragmentEventsBinding
+import com.ghor.livingstreamsdevotional.ui.adminauthentication.Utility
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -42,12 +43,18 @@ class EventsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.eventRecycler.layoutManager = LinearLayoutManager(activity)
-        binding.eventRecycler.adapter = adapter
-
-        eventsViewModel.events.observe(viewLifecycleOwner) {
-            adapter.setUpEvents(it)
+//        binding.eventRecycler.layoutManager = LinearLayoutManager(activity)
+//        binding.eventRecycler.adapter = adapter
+//
+//        eventsViewModel.events.observe(viewLifecycleOwner) {
+//            adapter.setUpEvents(it)
+//        }
+        if (Utility.isNetworkAvailable(context)){
+            getEvents()
+        }else{
+            Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
         }
+
     }
 
 
@@ -55,7 +62,7 @@ class EventsFragment : Fragment() {
         val childEventListener = object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val menuListener = object : ValueEventListener {
-                    private val nuggetsList = mutableListOf<EventData>()
+                    private val eventList = mutableListOf<EventData>()
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         for (dataValues in dataSnapshot.children) {
                             val day = dataValues.child("day").value.toString()
@@ -64,8 +71,8 @@ class EventsFragment : Fragment() {
                             val description = dataValues.child("description").value.toString()
                             val time = dataValues.child("time").value.toString()
                             val venue = dataValues.child("venue").value.toString()
-                            nuggetsList.add(EventData(day,month, title, description, time, venue))
-                            adapter.setUpEvents(nuggetsList)
+                            eventList.add(EventData(day, month, title, description, time, venue))
+                            adapter.setUpEvents(eventList)
                             binding.loadingEvent.visibility = View.GONE
                         }
                         binding.eventRecycler.layoutManager = LinearLayoutManager(activity)
