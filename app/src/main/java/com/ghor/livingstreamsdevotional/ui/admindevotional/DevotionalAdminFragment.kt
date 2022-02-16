@@ -44,31 +44,6 @@ class DevotionalAdminFragment : Fragment() {
         _binding = FragmentAdminDevotionalBinding.inflate(inflater, container, false)
 
 
-//        binding.dateText.setText(devotionalAdminViewModel.date.value)
-//            binding.topicText.setText(it)
-//            binding.scripture.setText(it)
-//            binding.scriptureBody.setText(it)
-//            binding.bodyText.setText(it)
-//            binding.nuggetText.setText(it)
-//            binding.prayerBody.setText(it)
-//            binding.actionPointBody.setText(it)
-//            binding.qualifierText.setText(it)
-//            binding.morningText.setText(it)
-//            binding.eveningText.setText(it)
-
-        //save text changes
-//        dataTextWatchers(binding.eveningText)
-//        dataTextWatchers(binding.morningText)
-//        dataTextWatchers(binding.dateText)
-//        dataTextWatchers(binding.bodyText)
-//        dataTextWatchers(binding.scripture)
-//        dataTextWatchers(binding.scriptureBody)
-//        dataTextWatchers(binding.topicText)
-//        dataTextWatchers(binding.qualifierText)
-//        dataTextWatchers(binding.actionPointBody)
-//        dataTextWatchers(binding.prayerBody)
-//        dataTextWatchers(binding.nuggetText)
-
         return binding.root
     }
 
@@ -131,16 +106,17 @@ class DevotionalAdminFragment : Fragment() {
 
                 //do the posting here
                 post(binding.dateText.text.toString(),
-               binding.topicText.text.toString(),
-               binding.qualifierText.text.toString(),
-               binding.scripture.text.toString(),
-               binding.scriptureBody.text.toString(),
-               binding.actionPointBody.text.toString(),
-               binding.prayerBody.text.toString(),
-               binding.nuggetText.text.toString(),
-               binding.eveningText.text.toString(),
-               binding.morningText.text.toString(),
-               binding.bodyText.text.toString(), )
+                    binding.topicText.text.toString(),
+                    binding.qualifierText.text.toString(),
+                    binding.scripture.text.toString(),
+                    binding.scriptureBody.text.toString(),
+                    binding.bodyText.text.toString(),
+                    binding.actionPointBody.text.toString(),
+                    binding.prayerBody.text.toString(),
+                    binding.nuggetText.text.toString(),
+                    binding.morningText.text.toString(),
+                    binding.eveningText.text.toString()
+                )
 
             } else {
 
