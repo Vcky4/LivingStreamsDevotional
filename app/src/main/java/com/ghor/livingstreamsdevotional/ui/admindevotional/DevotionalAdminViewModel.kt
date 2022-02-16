@@ -75,4 +75,5 @@ class DevotionalAdminViewModel : ViewModel() {
         _evening.value = evening
     }
 
+
 }

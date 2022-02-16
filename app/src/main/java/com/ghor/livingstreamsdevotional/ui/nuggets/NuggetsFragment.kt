@@ -46,8 +46,17 @@ class NuggetsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (Utility.isNetworkAvailable(context)){
+            getNuggets()
+        }else{
+            Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
+        }
+
+    }
 
 
+
+    private fun getNuggets() {
         val childEventListener = object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val menuListener = object : ValueEventListener {
@@ -66,7 +75,9 @@ class NuggetsFragment : Fragment() {
 
                     override fun onCancelled(databaseError: DatabaseError) {
                         // handle error
+                        binding.loadingPost.visibility = GONE
                         Toast.makeText(context, "unable to update nuggets", Toast.LENGTH_SHORT).show()
+
                     }
                 }
                 ref.addListenerForSingleValueEvent(menuListener)
@@ -78,43 +89,17 @@ class NuggetsFragment : Fragment() {
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
 
-            override fun onCancelled(error: DatabaseError) {}
+            override fun onCancelled(error: DatabaseError) {
+                binding.loadingPost.visibility = GONE
+                Toast.makeText(context, "unable to update nuggets", Toast.LENGTH_SHORT).show()
+
+            }
 
         }
 
         ref.addChildEventListener(childEventListener)
 
-
-
     }
-
-
-
-//    private fun getNuggets() {
-//        val menuListener = object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                for (dataValues in dataSnapshot.children) {
-//                    val game = dataValues.child("nugget").value.toString()
-//                    nuggetsList.add(game)
-//                }
-//                binding.loadingPost.visibility = GONE
-//
-//                if (nuggetsList.size > _nuggets.size){
-//                    binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
-//                    binding.nuggetRecycler.adapter = adapter
-//                    adapter.setUpNuggets(nuggetsList)
-//                    _nuggets.add(nuggetsList.last())
-//                }
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                // handle error
-//                Toast.makeText(context, "unable to update nuggets", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//        ref.addListenerForSingleValueEvent(menuListener)
-//
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

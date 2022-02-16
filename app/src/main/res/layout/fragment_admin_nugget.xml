@@ -39,38 +39,27 @@
         app:layout_constraintTop_toTopOf="@id/nugget_recycler"
         app:layout_constraintBottom_toBottomOf="@id/nugget_recycler"/>
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nug_lay"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:boxCornerRadiusBottomEnd="20dp"
-        app:boxCornerRadiusBottomStart="20dp"
-        app:boxCornerRadiusTopEnd="20dp"
-        android:hint=""
-        android:layout_marginBottom="50dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        app:boxCornerRadiusTopStart="20dp"
-        app:layout_constraintEnd_toStartOf="@id/send_bt">
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nugget_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:hint="Type a nugget"
-            tools:ignore="HardcodedText" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:background="@drawable/nugget_text"
+            tools:ignore="HardcodedText"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintEnd_toStartOf="@id/send_bt"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/send_bt"
         android:layout_width="30dp"
         android:layout_height="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@id/nug_lay"
+        app:layout_constraintTop_toTopOf="@id/nugget_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/nug_lay"
+        app:layout_constraintStart_toEndOf="@id/nugget_text"
         android:layout_marginBottom="50dp"
         android:gravity="center"
         android:enabled="false"
