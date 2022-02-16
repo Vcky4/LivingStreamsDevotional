@@ -134,9 +134,7 @@ class DevotionalAdminFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                if(binding.bodyText.text?.length!! >= 100){
-                    binding.postBt.isEnabled = true
-                }
+                binding.postBt.isEnabled = binding.bodyText.text?.length!! >= 500
             }
 
 

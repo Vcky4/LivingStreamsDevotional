@@ -3,6 +3,8 @@ package com.ghor.livingstreamsdevotional.ui.adminevent
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -54,6 +56,8 @@ class EventAdminFragment : Fragment() {
     val addEventBinding = AddEventLayoutBinding.inflate(layoutInflater)
     builder.setView(addEventBinding.root)
     val evenDialog = builder.create()
+
+    textWatchers(addEventBinding)
 
     binding.addEvent.setOnClickListener {
       evenDialog.show()
@@ -156,6 +160,35 @@ class EventAdminFragment : Fragment() {
     ref.addChildEventListener(childEventListener)
 
   }
+
+  private fun textWatchers(binding: AddEventLayoutBinding) {
+    val watcher: TextWatcher = object : TextWatcher {
+      override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+      override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        val s0 = binding.date.text.toString()
+        val s1 = binding.time.text.toString()
+        val s2 = binding.month.text.toString()
+        val s3 = binding.title.text.toString()
+        val s4 = binding.eventDescription.text.toString()
+        val s5 = binding.eventVenue.text.toString()
+        binding.postBt.isEnabled =
+          !(s0.isEmpty() || s1.isEmpty() || s2.isEmpty() || s3.isEmpty() ||s4.isEmpty() || s5.isEmpty())
+      }
+
+
+      override fun afterTextChanged(s: Editable?) {
+      }
+
+    }
+    binding.date            .addTextChangedListener(watcher)
+    binding.time            .addTextChangedListener(watcher)
+    binding.month           .addTextChangedListener(watcher)
+    binding.title           .addTextChangedListener(watcher)
+    binding.eventDescription.addTextChangedListener(watcher)
+    binding.eventVenue      .addTextChangedListener(watcher)
+  }
+
 
 
   override fun onDestroyView() {
