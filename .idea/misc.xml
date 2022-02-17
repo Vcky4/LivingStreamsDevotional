@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/layout/fragment_admin_event.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_admin_nugget.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_announcement.xml" value="0.1015625" />
+        <entry key="app/src/main/res/layout/fragment_archive.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/fragment_devotional.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_events.xml" value="0.2" />

@@ -22,4 +22,9 @@
         android:name="com.ghor.livingstreamsdevotional.ui.events.EventsFragment"
         android:label="@string/events"
         tools:layout="@layout/fragment_events" />
+    <fragment
+        android:id="@+id/navigation_archive"
+        android:name="com.ghor.livingstreamsdevotional.ui.archive.ArchiveFragment"
+        android:label="@string/archive"
+        tools:layout="@layout/fragment_archive" />
 </navigation>

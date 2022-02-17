@@ -17,4 +17,7 @@
     <string name="today_s_nugget">Today\'s Nuggets</string>
     <string name="upcoming_events">Upcoming Events</string>
     <string name="add_button">add button</string>
+    <string name="archive">Archive</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
