@@ -26,14 +26,17 @@ class EventAdapter: RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
         }
 
     fun setUpEvents(event: List<EventData>){
-        if (this.eventList.isEmpty()){
-            this.eventList.addAll(event)
-        }else if (eventList.size < event.size){
-            this.eventList.add(event.last())
-        }
-        else if (eventList.size > event.size){
-            this.eventList.clear()
-            this.eventList.addAll(event)
+        when {
+            this.eventList.isEmpty() -> {
+                this.eventList.addAll(event)
+            }
+            eventList.size < event.size -> {
+                this.eventList.add(event.last())
+            }
+            eventList.size > event.size -> {
+                this.eventList.clear()
+                this.eventList.addAll(event)
+            }
         }
     }
 

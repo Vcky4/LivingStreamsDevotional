@@ -60,11 +60,12 @@ class NuggetsFragment : Fragment() {
         val childEventListener = object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val menuListener = object : ValueEventListener {
-                    private val nuggetsList = mutableListOf<String>()
+                    private val nuggetsList = mutableListOf<NuggetData>()
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         for (dataValues in dataSnapshot.children) {
-                            val game = dataValues.child("nugget").value.toString()
-                            nuggetsList.add(game)
+                            val nugget = dataValues.child("nugget").value.toString()
+                            val key = dataValues.key.toString()
+                            nuggetsList.add(NuggetData(nugget, key))
                             adapter.setUpNuggets(nuggetsList)
                             binding.loadingPost.visibility = GONE
                         }

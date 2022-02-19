@@ -1,5 +1,6 @@
 package com.ghor.livingstreamsdevotional.ui.adminnugget
 
+import android.app.AlertDialog
 import android.content.ContentValues
 import android.os.Bundle
 import android.text.Editable
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ghor.livingstreamsdevotional.databinding.DeleteDialogBinding
 import com.ghor.livingstreamsdevotional.databinding.FragmentAdminNuggetBinding
 import com.ghor.livingstreamsdevotional.ui.adminauthentication.Utility
 import com.ghor.livingstreamsdevotional.ui.nuggets.NuggetData
@@ -27,8 +29,8 @@ class NuggetAdminFragment : Fragment() {
 
     private val database: DatabaseReference = Firebase.database.reference
     private lateinit var nuggetAdminViewModel: NuggetAdminViewModel
-    private val nuggetsList = mutableListOf<String>()
     private val adapter = AdminNuggetAdapter()
+    private val ref = database.child("posts").ref
 
 
     private var _binding: FragmentAdminNuggetBinding? = null
@@ -51,6 +53,47 @@ class NuggetAdminFragment : Fragment() {
         nuggetTextWatchers()
         getNuggets()
 
+        val qBuilder = AlertDialog.Builder(context)
+        val deleteBinding = DeleteDialogBinding.inflate(layoutInflater)
+        qBuilder.setView(deleteBinding.root)
+        val deleteDialog = qBuilder.create()
+
+
+        adapter.setItemOnLongClickListener { item ->
+                deleteDialog.show()
+
+                deleteBinding.yesBt.setOnClickListener {
+
+                    val menuListener = object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            for (dataValues in dataSnapshot.children) {
+                                if (dataValues.key == item.key){
+                                    dataValues.ref.removeValue()
+                                        .addOnSuccessListener {
+                                            getNuggets()
+                                            Toast.makeText(context, "Remove nugget successful", Toast.LENGTH_SHORT).show()
+                                        }
+                                }
+                            }
+
+                        }
+
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            // handle error
+                            binding.loadingPost.visibility = GONE
+                            Toast.makeText(context, "unable to update nuggets", Toast.LENGTH_SHORT).show()
+
+                        }
+                    }
+                    ref.addListenerForSingleValueEvent(menuListener)
+
+
+                    deleteDialog.dismiss()
+                }
+
+
+
+        }
 
         return binding.root
     }
@@ -65,7 +108,7 @@ class NuggetAdminFragment : Fragment() {
             if (Utility.isNetworkAvailable(context)) {
 
 
-                addNugget(binding.nuggetText.text.toString())
+                addNugget(binding.nuggetText.text.toString(), "")
 
                 getNuggets()
                 binding.nuggetText.text?.clear()
@@ -81,12 +124,13 @@ class NuggetAdminFragment : Fragment() {
 
 
     private fun getNuggets() {
-        val ref = database.child("posts").ref
+         val nuggetsList = mutableListOf<NuggetData>()
         val menuListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (dataValues in dataSnapshot.children) {
-                    val game = dataValues.child("nugget").value.toString()
-                    nuggetsList.add(game)
+                    val nugget = dataValues.child("nugget").value.toString()
+                    val key = dataValues.key.toString()
+                    nuggetsList.add(NuggetData(nugget, key))
                 }
                 binding.nuggetRecycler.layoutManager = LinearLayoutManager(activity)
                 binding.nuggetRecycler.adapter = adapter
@@ -101,14 +145,16 @@ class NuggetAdminFragment : Fragment() {
         ref.addListenerForSingleValueEvent(menuListener)
     }
 
-    private fun addNugget(nugget: String) {
-        val key = database.child("posts").push().key
+    private fun addNugget(nugget: String, _key: String) {
+        val key = _key.ifEmpty {
+            database.child("devotional").push().key
+        }
         if (key == null) {
             Log.w(ContentValues.TAG, "Couldn't get push key for posts")
             return
         }
 
-        val post = NuggetData(nugget)
+        val post = NuggetData(nugget, key)
         val postValues = post.toMap()
 
         val childUpdates = hashMapOf<String, Any>(

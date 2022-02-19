@@ -5,16 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ghor.livingstreamsdevotional.R
 import com.ghor.livingstreamsdevotional.databinding.NuggetListItemBinding
+import com.ghor.livingstreamsdevotional.ui.events.EventData
 
 class NuggetAdapter : RecyclerView.Adapter<NuggetAdapter.NuggetViewHolder>() {
 
-    private val nuggetList = mutableListOf<String>()
+    private val nuggetList = mutableListOf<NuggetData>()
 
     inner class NuggetViewHolder(private val binding: NuggetListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindNuggets(nuggets: String) {
-            binding.nuggetsT.text = nuggets
+        fun bindNuggets(nuggets: NuggetData) {
+            binding.nuggetsT.text = nuggets.nugget
         }
 
         fun setPosition(position: Int) {
@@ -26,9 +27,10 @@ class NuggetAdapter : RecyclerView.Adapter<NuggetAdapter.NuggetViewHolder>() {
                 binding.layout.setPadding(90, 10, 10, 10)
             }
         }
+
     }
 
-    fun setUpNuggets(nuggets: List<String>) {
+    fun setUpNuggets(nuggets: List<NuggetData>) {
         if (nuggetList.isEmpty()) {
             this.nuggetList.addAll(nuggets)
         } else if (nuggetList.size < nuggets.size) {
@@ -48,7 +50,11 @@ class NuggetAdapter : RecyclerView.Adapter<NuggetAdapter.NuggetViewHolder>() {
         val nugget = nuggetList[position]
         holder.bindNuggets(nugget)
         holder.position = position
-    }
+
+        }
+
+
+
 
     override fun getItemCount(): Int {
         return nuggetList.size

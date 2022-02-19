@@ -9,13 +9,13 @@ import com.ghor.livingstreamsdevotional.ui.nuggets.NuggetData
 
 class AdminNuggetAdapter: RecyclerView.Adapter<AdminNuggetAdapter.NuggetViewHolder>() {
 
-    private val nuggetList = mutableListOf<String>()
+    private val nuggetList = mutableListOf<NuggetData>()
 
     inner class NuggetViewHolder(private val binding: NuggetListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindNuggets(nuggets: String) {
-            binding.nuggetsT.text = nuggets
+        fun bindNuggets(nuggets: NuggetData) {
+            binding.nuggetsT.text = nuggets.nugget
         }
 
         fun setPosition(position: Int) {
@@ -27,13 +27,21 @@ class AdminNuggetAdapter: RecyclerView.Adapter<AdminNuggetAdapter.NuggetViewHold
                 binding.layout.setPadding(90, 10, 10, 10)
             }
         }
+        val card = binding.card
     }
 
-    fun setUpNuggets(nuggets: List<String>) {
-        if (nuggetList.isEmpty()) {
-            this.nuggetList.addAll(nuggets)
-        } else if (nuggetList.size < nuggets.size) {
-            this.nuggetList.add(nuggets.last())
+    fun setUpNuggets(nuggets: List<NuggetData>) {
+        when {
+            this.nuggetList.isEmpty() -> {
+                this.nuggetList.addAll(nuggets)
+            }
+            nuggetList.size < nuggets.size -> {
+                this.nuggetList.add(nuggets.last())
+            }
+            nuggetList.size > nuggets.size -> {
+                this.nuggetList.clear()
+                this.nuggetList.addAll(nuggets)
+            }
         }
     }
 
@@ -49,6 +57,17 @@ class AdminNuggetAdapter: RecyclerView.Adapter<AdminNuggetAdapter.NuggetViewHold
         val nugget = nuggetList[position]
         holder.bindNuggets(nugget)
         holder.position = position
+
+        holder.card.setOnLongClickListener {
+            onItemLongClickListener?.let { it(nugget) }
+            return@setOnLongClickListener true
+        }
+    }
+
+    private var onItemLongClickListener: ((NuggetData) -> Unit)? = null
+
+    fun setItemOnLongClickListener( listener: (NuggetData) -> Unit){
+        onItemLongClickListener = listener
     }
 
     override fun getItemCount(): Int {
