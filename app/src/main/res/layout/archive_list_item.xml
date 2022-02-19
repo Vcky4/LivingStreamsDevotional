@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,37 +10,46 @@
     android:paddingHorizontal="15dp"
     tools:ignore="HardcodedText" >
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/topic"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="Topic"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/scripture"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topic"
-        android:text="Psalm 24"
-        android:textStyle="bold"
-        android:textSize="18sp"/>
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scripture"
-        android:gravity="end"
-        android:paddingHorizontal="20dp"
-        android:text="Saturday 19 February"
-        android:textStyle="bold"
-        android:textSize="18sp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/card"
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/topic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Topic"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/scripture"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topic"
+            android:text="Psalm 24"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scripture"
+            android:gravity="end"
+            android:paddingHorizontal="20dp"
+            android:text="Saturday 19 February"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</FrameLayout>

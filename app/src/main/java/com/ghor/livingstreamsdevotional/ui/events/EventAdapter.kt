@@ -48,6 +48,7 @@ class EventAdapter: RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
         holder.card.setOnClickListener {
             onItemClickListener?.let { it(event) }
         }
+
     }
 
     private var onItemClickListener: ((EventData) -> Unit)? = null

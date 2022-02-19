@@ -76,7 +76,8 @@ class EventsFragment : Fragment() {
                             val time = dataValues.child("time").value.toString()
                             val venue = dataValues.child("venue").value.toString()
                             val link = dataValues.child("link").value.toString()
-                            eventList.add(EventData(day, month, title, description, time, venue, link))
+                            val key = dataValues.key.toString()
+                            eventList.add(EventData(day, month, title, description, time, venue, link, key))
                             adapter.setUpEvents(eventList)
                             binding.loadingEvent.visibility = View.GONE
                         }

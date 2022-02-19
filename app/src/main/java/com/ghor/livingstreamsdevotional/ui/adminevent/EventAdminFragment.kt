@@ -31,6 +31,7 @@ class EventAdminFragment : Fragment() {
   private val ref = database.child("event").ref
   private val adapter = EventAdapter()
 
+
   // This property is only valid between onCreateView and
   // onDestroyView.
   private val binding get() = _binding!!
@@ -55,12 +56,22 @@ class EventAdminFragment : Fragment() {
     val builder = AlertDialog.Builder(context)
     val addEventBinding = AddEventLayoutBinding.inflate(layoutInflater)
     builder.setView(addEventBinding.root)
-    val evenDialog = builder.create()
+    val eventDialog = builder.create()
+    eventDialog.setOnDismissListener {
+      addEventBinding.eventVenue.text?.clear()
+      addEventBinding.eventDescription.text?.clear()
+      addEventBinding.title.text?.clear()
+      addEventBinding.time.text?.clear()
+      addEventBinding.date.text?.clear()
+      addEventBinding.link.text?.clear()
+      addEventBinding.month.text?.clear()
+    }
 
+    
     textWatchers(addEventBinding)
 
     binding.addEvent.setOnClickListener {
-      evenDialog.show()
+      eventDialog.show()
     }
     if (Utility.isNetworkAvailable(context)){
       getEvents()
@@ -71,25 +82,58 @@ class EventAdminFragment : Fragment() {
         post(addEventBinding.date.text.toString(), addEventBinding.month.text.toString(),
           addEventBinding.title.text.toString(), addEventBinding.eventDescription.text.toString(),
           addEventBinding.time.text.toString(), addEventBinding.eventVenue.text.toString(),
-          addEventBinding.link.text.toString(), addEventBinding)
+          addEventBinding.link.text.toString(), "", addEventBinding)
 
-        evenDialog.dismiss()
+        eventDialog.dismiss()
       }
     }else{
       Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
+    }
+    adapter.setItemOnClickListener {
+    }
+
+    adapter.setItemOnClickListener { item ->
+      if (Utility.isNetworkAvailable(context)){
+
+        eventDialog.show()
+
+        addEventBinding.date.setText(item.day)
+        addEventBinding.time.setText(item.time)
+        addEventBinding.title.setText(item.title)
+        addEventBinding.eventDescription.setText(item.description)
+        addEventBinding.month.setText(item.month)
+        addEventBinding.link.setText(item.link)
+        addEventBinding.eventVenue.setText(item.venue)
+
+        addEventBinding.postBt.setOnClickListener {
+          addEventBinding.loadingDevotional.visibility = VISIBLE
+          addEventBinding.postBt.isEnabled = false
+
+          post(addEventBinding.date.text.toString(), addEventBinding.month.text.toString(),
+            addEventBinding.title.text.toString(), addEventBinding.eventDescription.text.toString(),
+            addEventBinding.time.text.toString(), addEventBinding.eventVenue.text.toString(),
+            addEventBinding.link.text.toString(), item.key , addEventBinding)
+
+          eventDialog.dismiss()
+        }
+      }else{
+        Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
+      }
     }
 
   }
 
   private fun post(day: String, month : String, title : String, description : String,
-                   time : String, venue : String, link: String, binding: AddEventLayoutBinding){
-    val key = database.child("devotional").push().key
+                   time : String, venue : String, link: String, _key: String, binding: AddEventLayoutBinding){
+    val key = _key.ifEmpty {
+      database.child("devotional").push().key
+    }
     if (key == null) {
       Log.w(ContentValues.TAG, "Couldn't get push key for posts")
       return
     }
 
-    val event = EventData(day,month,title,description,time,venue,link)
+    val event = EventData(day,month,title,description,time,venue,link, key)
     val postValues = event.toMap()
 
     val childUpdates = hashMapOf<String, Any>(
@@ -126,7 +170,8 @@ class EventAdminFragment : Fragment() {
               val time = dataValues.child("time").value.toString()
               val venue = dataValues.child("venue").value.toString()
               val link = dataValues.child("link").value.toString()
-              eventList.add(EventData(day, month, title, description, time, venue, link))
+              val key = dataValues.key.toString()
+              eventList.add(EventData(day, month, title, description, time, venue, link, key))
               adapter.setUpEvents(eventList)
               binding.loadingEvent.visibility = View.GONE
             }
