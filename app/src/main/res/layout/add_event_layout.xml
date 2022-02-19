@@ -85,6 +85,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/link"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textUri"

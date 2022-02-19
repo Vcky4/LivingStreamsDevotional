@@ -70,7 +70,8 @@ class EventAdminFragment : Fragment() {
 
         post(addEventBinding.date.text.toString(), addEventBinding.month.text.toString(),
           addEventBinding.title.text.toString(), addEventBinding.eventDescription.text.toString(),
-          addEventBinding.time.text.toString(), addEventBinding.eventVenue.text.toString(), addEventBinding)
+          addEventBinding.time.text.toString(), addEventBinding.eventVenue.text.toString(),
+          addEventBinding.link.text.toString(), addEventBinding)
 
         evenDialog.dismiss()
       }
@@ -81,14 +82,14 @@ class EventAdminFragment : Fragment() {
   }
 
   private fun post(day: String, month : String, title : String, description : String,
-                   time : String, venue : String, binding: AddEventLayoutBinding){
+                   time : String, venue : String, link: String, binding: AddEventLayoutBinding){
     val key = database.child("devotional").push().key
     if (key == null) {
       Log.w(ContentValues.TAG, "Couldn't get push key for posts")
       return
     }
 
-    val event = EventData(day,month,title,description,time,venue)
+    val event = EventData(day,month,title,description,time,venue,link)
     val postValues = event.toMap()
 
     val childUpdates = hashMapOf<String, Any>(
@@ -124,7 +125,8 @@ class EventAdminFragment : Fragment() {
               val description = dataValues.child("description").value.toString()
               val time = dataValues.child("time").value.toString()
               val venue = dataValues.child("venue").value.toString()
-              eventList.add(EventData(day, month, title, description, time, venue))
+              val link = dataValues.child("link").value.toString()
+              eventList.add(EventData(day, month, title, description, time, venue, link))
               adapter.setUpEvents(eventList)
               binding.loadingEvent.visibility = View.GONE
             }

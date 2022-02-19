@@ -3,7 +3,7 @@ package com.ghor.livingstreamsdevotional.ui.events
 import com.google.firebase.database.Exclude
 
 data class EventData(val day: String, val month: String, val title: String,
-                     val description: String, val time: String, val venue: String){
+                     val description: String, val time: String, val venue: String, link: String){
     @Exclude
     fun toMap(): Map<String, Any?> {
         return mapOf(
@@ -12,6 +12,7 @@ data class EventData(val day: String, val month: String, val title: String,
             "title" to title,
             "description" to description,
             "time" to time,
-            "venue" to venue )
+            "venue" to venue,
+        "link" to link)
     }
 }
