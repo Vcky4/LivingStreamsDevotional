@@ -31,6 +31,10 @@ class EventAdapter: RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
         }else if (eventList.size < event.size){
             this.eventList.add(event.last())
         }
+        else if (eventList.size > event.size){
+            this.eventList.clear()
+            this.eventList.addAll(event)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {

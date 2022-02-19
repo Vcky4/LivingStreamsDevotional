@@ -59,6 +59,7 @@ class EventAdminFragment : Fragment() {
     builder.setView(addEventBinding.root)
     val eventDialog = builder.create()
     eventDialog.setOnDismissListener {
+      // clear entries
       addEventBinding.eventVenue.text?.clear()
       addEventBinding.eventDescription.text?.clear()
       addEventBinding.title.text?.clear()
@@ -68,6 +69,7 @@ class EventAdminFragment : Fragment() {
       addEventBinding.month.text?.clear()
     }
 
+    // delete dialog
     val qBuilder = AlertDialog.Builder(context)
     val deleteBinding = DeleteDialogBinding.inflate(layoutInflater)
     qBuilder.setView(deleteBinding.root)
@@ -92,47 +94,49 @@ class EventAdminFragment : Fragment() {
 
         eventDialog.dismiss()
       }
+
+      adapter.setItemOnLongClickListener { item->
+        deleteDialog.show()
+
+        deleteBinding.yesBt.setOnClickListener {
+
+          val menuListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+              for (dataValues in dataSnapshot.children) {
+                if (dataValues.key == item.key){
+                  dataValues.ref.removeValue()
+                    .addOnSuccessListener {
+                      getEvents()
+                      Toast.makeText(context, "Remove event successful", Toast.LENGTH_SHORT).show()
+                    }
+                }
+              }
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+              // handle error
+              binding.loadingEvent.visibility = View.GONE
+              Toast.makeText(context, "unable to update events", Toast.LENGTH_SHORT).show()
+
+            }
+          }
+          ref.addListenerForSingleValueEvent(menuListener)
+
+
+          deleteDialog.dismiss()
+        }
+
+      }
+
+
+      deleteBinding.noBt.setOnClickListener {
+        deleteDialog.dismiss()
+      }
     }else{
       Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
     }
-    adapter.setItemOnLongClickListener { item->
-      deleteDialog.show()
 
-
-      deleteBinding.yesBt.setOnClickListener {
-
-        val menuListener = object : ValueEventListener {
-          override fun onDataChange(dataSnapshot: DataSnapshot) {
-            for (dataValues in dataSnapshot.children) {
-              if (dataValues.key == item.key){
-                dataValues.ref.removeValue()
-                  .addOnSuccessListener {
-                    Toast.makeText(context, "Remove event successful", Toast.LENGTH_SHORT).show()
-                  }
-              }
-            }
-
-          }
-
-          override fun onCancelled(databaseError: DatabaseError) {
-            // handle error
-            binding.loadingEvent.visibility = View.GONE
-            Toast.makeText(context, "unable to update events", Toast.LENGTH_SHORT).show()
-
-          }
-        }
-        ref.addListenerForSingleValueEvent(menuListener)
-
-
-        deleteDialog.dismiss()
-      }
-
-    }
-
-
-    deleteBinding.noBt.setOnClickListener {
-      deleteDialog.dismiss()
-    }
 
     adapter.setItemOnClickListener { item ->
       if (Utility.isNetworkAvailable(context)){
