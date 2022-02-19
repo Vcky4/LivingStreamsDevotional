@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ghor.livingstreamsdevotional.databinding.AddEventLayoutBinding
+import com.ghor.livingstreamsdevotional.databinding.DeleteDialogBinding
 import com.ghor.livingstreamsdevotional.databinding.FragmentAdminEventBinding
 import com.ghor.livingstreamsdevotional.ui.adminauthentication.Utility
 import com.ghor.livingstreamsdevotional.ui.events.EventAdapter
@@ -67,6 +68,11 @@ class EventAdminFragment : Fragment() {
       addEventBinding.month.text?.clear()
     }
 
+    val qBuilder = AlertDialog.Builder(context)
+    val deleteBinding = DeleteDialogBinding.inflate(layoutInflater)
+    qBuilder.setView(deleteBinding.root)
+    val deleteDialog = qBuilder.create()
+
     
     textWatchers(addEventBinding)
 
@@ -89,7 +95,43 @@ class EventAdminFragment : Fragment() {
     }else{
       Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
     }
-    adapter.setItemOnClickListener {
+    adapter.setItemOnLongClickListener { item->
+      deleteDialog.show()
+
+
+      deleteBinding.yesBt.setOnClickListener {
+
+        val menuListener = object : ValueEventListener {
+          override fun onDataChange(dataSnapshot: DataSnapshot) {
+            for (dataValues in dataSnapshot.children) {
+              if (dataValues.key == item.key){
+                dataValues.ref.removeValue()
+                  .addOnSuccessListener {
+                    Toast.makeText(context, "Remove event successful", Toast.LENGTH_SHORT).show()
+                  }
+              }
+            }
+
+          }
+
+          override fun onCancelled(databaseError: DatabaseError) {
+            // handle error
+            binding.loadingEvent.visibility = View.GONE
+            Toast.makeText(context, "unable to update events", Toast.LENGTH_SHORT).show()
+
+          }
+        }
+        ref.addListenerForSingleValueEvent(menuListener)
+
+
+        deleteDialog.dismiss()
+      }
+
+    }
+
+
+    deleteBinding.noBt.setOnClickListener {
+      deleteDialog.dismiss()
     }
 
     adapter.setItemOnClickListener { item ->
@@ -183,7 +225,7 @@ class EventAdminFragment : Fragment() {
           override fun onCancelled(databaseError: DatabaseError) {
             // handle error
             binding.loadingEvent.visibility = View.GONE
-            Toast.makeText(context, "unable to update nuggets", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "unable to update events", Toast.LENGTH_SHORT).show()
 
           }
         }
@@ -198,7 +240,7 @@ class EventAdminFragment : Fragment() {
 
       override fun onCancelled(error: DatabaseError) {
         binding.loadingEvent.visibility = View.GONE
-        Toast.makeText(context, "unable to update nuggets", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "unable to update events", Toast.LENGTH_SHORT).show()
 
       }
 

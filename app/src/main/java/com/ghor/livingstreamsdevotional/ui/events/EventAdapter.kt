@@ -49,12 +49,20 @@ class EventAdapter: RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
             onItemClickListener?.let { it(event) }
         }
 
+        holder.card.setOnLongClickListener {
+            onItemLongClickListener?.let { it(event) }
+            return@setOnLongClickListener true
+        }
     }
 
     private var onItemClickListener: ((EventData) -> Unit)? = null
+    private var onItemLongClickListener: ((EventData) -> Unit)? = null
 
     fun setItemOnClickListener( listener: (EventData) -> Unit){
         onItemClickListener = listener
+    }
+    fun setItemOnLongClickListener( listener: (EventData) -> Unit){
+        onItemLongClickListener = listener
     }
 
     override fun getItemCount(): Int {

@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/layout/add_event_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/archive_list_item.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/authentication_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/delete_dialog.xml" value="0.22" />
         <entry key="app/src/main/res/layout/event_list_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_admin_devotional.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_admin_event.xml" value="0.2" />
