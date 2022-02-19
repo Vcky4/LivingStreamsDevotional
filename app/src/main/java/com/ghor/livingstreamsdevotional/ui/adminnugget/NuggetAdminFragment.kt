@@ -51,15 +51,25 @@ class NuggetAdminFragment : Fragment() {
 
         handleClicks()
         nuggetTextWatchers()
-        getNuggets()
-
-        val qBuilder = AlertDialog.Builder(context)
-        val deleteBinding = DeleteDialogBinding.inflate(layoutInflater)
-        qBuilder.setView(deleteBinding.root)
-        val deleteDialog = qBuilder.create()
 
 
-        adapter.setItemOnLongClickListener { item ->
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (Utility.isNetworkAvailable(context)){
+
+            getNuggets()
+
+            val qBuilder = AlertDialog.Builder(context)
+            val deleteBinding = DeleteDialogBinding.inflate(layoutInflater)
+            qBuilder.setView(deleteBinding.root)
+            val deleteDialog = qBuilder.create()
+
+
+            adapter.setItemOnLongClickListener { item ->
                 deleteDialog.show()
 
                 deleteBinding.yesBt.setOnClickListener {
@@ -90,12 +100,15 @@ class NuggetAdminFragment : Fragment() {
 
                     deleteDialog.dismiss()
                 }
+            }
 
-
-
+            deleteBinding.noBt.setOnClickListener {
+                deleteDialog.dismiss()
+            }
+        }else{
+            Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
         }
 
-        return binding.root
     }
 
 
@@ -106,7 +119,6 @@ class NuggetAdminFragment : Fragment() {
 
             //here you can check for network availability first, if the network is available, continue
             if (Utility.isNetworkAvailable(context)) {
-
 
                 addNugget(binding.nuggetText.text.toString(), "")
 
