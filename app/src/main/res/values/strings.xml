@@ -20,4 +20,5 @@
     <string name="archive">Archive</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="devotional_archive">Devotional Archive</string>
 </resources>

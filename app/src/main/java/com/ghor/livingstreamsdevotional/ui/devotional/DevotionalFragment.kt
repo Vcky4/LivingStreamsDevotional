@@ -41,8 +41,6 @@ class DevotionalFragment : Fragment() {
 
         _binding = FragmentDevotionalBinding.inflate(inflater, container, false)
 
-        devotionalViewModel.update()
-
         return binding.root
     }
 
