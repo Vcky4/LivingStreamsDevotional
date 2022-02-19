@@ -84,7 +84,16 @@ class EventsFragment : Fragment() {
                         binding.eventRecycler.adapter = adapter
 
                         //for click action to live stream
-                        val webIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.android.com"))
+                        adapter.setItemOnClickListener {
+                            if (it.link.isEmpty()){
+                                Toast.makeText(context, "Sorry event not live!", Toast.LENGTH_LONG).show()
+                            }else{
+                                val webIntent = Intent(
+                                    Intent.ACTION_VIEW, Uri.parse(it.link))
+                                startActivity(webIntent)
+                            }
+
+                        }
 
 
                     }

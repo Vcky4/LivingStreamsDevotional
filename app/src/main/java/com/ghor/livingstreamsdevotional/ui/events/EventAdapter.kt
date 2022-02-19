@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ghor.livingstreamsdevotional.databinding.EventListItemBinding
+import com.ghor.livingstreamsdevotional.ui.archive.ArchiveData
 
 class EventAdapter: RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
@@ -20,6 +21,8 @@ class EventAdapter: RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
                 binding.eventVenue.text = event.venue
                 binding.eventDescription.text = event.description
             }
+
+        val card = binding.card
         }
 
     fun setUpEvents(event: List<EventData>){
@@ -41,6 +44,16 @@ class EventAdapter: RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val event = eventList[position]
         holder.bindEvents(event)
+
+        holder.card.setOnClickListener {
+            onItemClickListener?.let { it(event) }
+        }
+    }
+
+    private var onItemClickListener: ((EventData) -> Unit)? = null
+
+    fun setItemOnClickListener( listener: (EventData) -> Unit){
+        onItemClickListener = listener
     }
 
     override fun getItemCount(): Int {

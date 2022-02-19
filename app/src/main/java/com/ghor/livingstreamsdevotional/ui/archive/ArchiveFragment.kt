@@ -3,6 +3,7 @@ package com.ghor.livingstreamsdevotional.ui.archive
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -66,6 +67,7 @@ class ArchiveFragment : Fragment() {
                             val date = dataValues.child("date").value.toString()
                             val topic = dataValues.child("topic").value.toString()
                             val key = dataValues.key.toString()
+                            Log.d("KEY",key)
 
                             archiveList.add(ArchiveData(topic,date,scripture,key))
                             adapter.setUpArchive(archiveList)
