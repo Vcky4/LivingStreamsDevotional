@@ -10,14 +10,11 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import com.ghor.livingstreamsdevotional.databinding.FragmentAdminDevotionalBinding
 import com.ghor.livingstreamsdevotional.ui.adminauthentication.Utility
-import com.ghor.livingstreamsdevotional.ui.nuggets.NuggetData
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase

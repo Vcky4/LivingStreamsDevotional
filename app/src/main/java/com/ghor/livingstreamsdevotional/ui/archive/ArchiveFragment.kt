@@ -10,7 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ghor.livingstreamsdevotional.R
 import com.ghor.livingstreamsdevotional.databinding.FragmentArchiveBinding
 import com.ghor.livingstreamsdevotional.databinding.FragmentDevotionalBinding
 import com.ghor.livingstreamsdevotional.ui.adminauthentication.Utility
@@ -50,6 +52,13 @@ class ArchiveFragment : Fragment() {
             Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
         }
 
+        adapter.setItemOnClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("display", it)
+            }
+            findNavController().navigate(R.id.action_navigation_archive_to_displayDevotionalFragment, bundle)
+
+        }
 
     }
 

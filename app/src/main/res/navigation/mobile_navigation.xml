@@ -26,5 +26,21 @@
         android:id="@+id/navigation_archive"
         android:name="com.ghor.livingstreamsdevotional.ui.archive.ArchiveFragment"
         android:label="@string/archive"
-        tools:layout="@layout/fragment_archive" />
+        tools:layout="@layout/fragment_archive" >
+        <action
+            android:id="@+id/action_navigation_archive_to_displayDevotionalFragment"
+            app:destination="@id/displayDevotionalFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/displayDevotionalFragment"
+        android:name="com.ghor.livingstreamsdevotional.ui.devotional.DisplayDevotionalFragment"
+        android:label="@string/devotional"
+        tools:layout="@layout/fragment_display_devotional">
+        <argument android:name="display"
+            app:argType="com.ghor.livingstreamsdevotional.ui.archive.ArchiveData"/>
+    </fragment>
 </navigation>
