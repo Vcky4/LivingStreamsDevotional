@@ -1,6 +1,8 @@
 package com.ghor.livingstreamsdevotional.ui.devotional
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -51,6 +53,21 @@ class DevotionalFragment : Fragment() {
             update()
         }else{
             Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
+        }
+
+        binding.feedbackBt.setOnClickListener {
+
+            val intent = Intent(Intent.ACTION_SEND).apply {
+                // The intent does not have a URI, so declare the "text/plain" MIME type
+                type = "text/plain"
+                putExtra(Intent.EXTRA_EMAIL, arrayOf("ezekiel.atang@yahoo.com")) // recipients
+                putExtra(Intent.EXTRA_SUBJECT, "Devotional Feedback")
+                putExtra(Intent.EXTRA_TEXT, "Hello sir, Thanks for being a blessing.")
+                // You can also attach multiple items by passing an ArrayList of Uris
+            }
+
+            startActivity(intent)
+
         }
 
     }
