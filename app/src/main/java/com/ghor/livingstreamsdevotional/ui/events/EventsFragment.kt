@@ -1,5 +1,7 @@
 package com.ghor.livingstreamsdevotional.ui.events
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -55,6 +57,8 @@ class EventsFragment : Fragment() {
             Toast.makeText(context, "Please check your internet", Toast.LENGTH_LONG).show()
         }
 
+
+
     }
 
 
@@ -78,6 +82,10 @@ class EventsFragment : Fragment() {
                         }
                         binding.eventRecycler.layoutManager = LinearLayoutManager(activity)
                         binding.eventRecycler.adapter = adapter
+
+                        //for click action to live stream
+                        val webIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.android.com"))
+
 
                     }
 
